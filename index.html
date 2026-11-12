@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Việc làm Hải Phòng</title>
+    <meta name="theme-color" content="#0756a5">
+    <meta name="description" content="Cổng thông tin việc làm Hải Phòng. Cập nhật việc làm mới nhất, đặc biệt các vị trí kỹ thuật và bảo trì.">
+
+    <title>Việc làm Hải Phòng | Luong Fix</title>
 
     <style>
         * {
@@ -13,77 +16,187 @@
 
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f3f5f8;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f1f5fa;
             color: #263445;
         }
 
+        /* HEADER */
         header {
-            background: #0756a5;
+            background: linear-gradient(120deg, #06366d, #0756a5, #1684d8);
             color: white;
-            padding: 25px 18px;
+            padding: 42px 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 45, 100, 0.18);
+        }
+
+        header::after {
+            content: "";
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            border: 35px solid rgba(255,255,255,0.07);
+            border-radius: 50%;
+            right: 8%;
+            top: -145px;
+        }
+
+        .header-content {
+            max-width: 1050px;
+            margin: auto;
+            position: relative;
+            z-index: 1;
         }
 
         header h1 {
             margin: 0;
-            font-size: 23px;
+            font-size: 30px;
+            letter-spacing: 1px;
         }
 
         header p {
-            margin: 8px 0 0;
-            font-size: 14px;
+            margin: 12px 0 0;
+            font-size: 15px;
             color: #dcecff;
         }
 
+        .header-tag {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 7px 13px;
+            border: 1px solid rgba(255,255,255,0.35);
+            border-radius: 30px;
+            font-size: 12px;
+            color: #eaf5ff;
+        }
+
+        /* MAIN */
         main {
-            max-width: 650px;
-            margin: auto;
-            padding: 18px 14px;
+            max-width: 1050px;
+            margin: 30px auto;
+            padding: 0 18px;
+        }
+
+        /* SEARCH BOX */
+        .search-box {
+            background: white;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 4px 16px rgba(20,60,100,0.06);
+            border: 1px solid #e3ebf4;
+        }
+
+        .search-title {
+            margin: 0 0 15px;
+            font-size: 17px;
+            color: #073f7a;
+        }
+
+        .filter-row {
+            display: grid;
+            grid-template-columns: 1fr 250px;
+            gap: 12px;
         }
 
         .search {
             width: 100%;
-            padding: 14px;
-            border: 1px solid #d5dce5;
-            border-radius: 10px;
-            font-size: 16px;
-            margin-bottom: 18px;
+            min-width: 0;
+            padding: 14px 15px;
+            border: 1px solid #d4e0ee;
+            border-radius: 9px;
+            font-size: 15px;
+            background: #fff;
+            color: #263445;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .search:focus {
+            border-color: #1684d8;
+            box-shadow: 0 0 0 3px rgba(22,132,216,0.12);
+        }
+
+        /* JOB SECTION */
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin: 28px 0 16px;
         }
 
         .section-title {
-            font-size: 18px;
-            margin-bottom: 14px;
+            font-size: 21px;
+            color: #073f7a;
+            margin: 0;
+            padding-left: 12px;
+            border-left: 4px solid #1684d8;
+        }
+
+        .job-count {
+            font-size: 13px;
+            color: #718096;
+        }
+
+        /* JOB LIST */
+        #jobList {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        #jobList > p {
+            grid-column: 1 / -1;
+            background: white;
+            padding: 22px;
+            border-radius: 10px;
+            color: #66788a;
+            text-align: center;
         }
 
         .job {
             background: white;
             border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 12px;
-            border: 1px solid #e2e7ed;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+            padding: 19px;
+            border: 1px solid #e0e9f3;
+            border-left: 4px solid #1684d8;
+            box-shadow: 0 3px 12px rgba(20,60,100,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .job:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 18px rgba(20,60,100,0.11);
         }
 
         .job h3 {
             color: #0756a5;
             font-size: 17px;
-            margin: 0 0 9px;
+            line-height: 1.45;
+            margin: 0 0 14px;
         }
 
         .job p {
             font-size: 14px;
-            margin: 6px 0;
-            line-height: 1.5;
+            margin: 8px 0;
+            line-height: 1.55;
+            overflow-wrap: anywhere;
         }
 
         .salary {
-            color: #16834b;
+            color: #13834d;
             font-weight: bold;
+            background: #eaf8f0;
+            padding: 8px 10px;
+            border-radius: 7px;
+            display: inline-block;
         }
 
+        /* DETAILS */
         details {
-            margin-top: 12px;
-            border-top: 1px solid #edf0f3;
+            margin-top: 13px;
+            border-top: 1px solid #e8eef5;
             padding-top: 10px;
         }
 
@@ -92,25 +205,108 @@
             font-size: 14px;
             font-weight: bold;
             cursor: pointer;
-            padding: 5px 0;
+            padding: 6px 0;
+        }
+
+        summary:hover {
+            color: #1684d8;
         }
 
         .detail {
             font-size: 14px;
-            line-height: 1.6;
+            line-height: 1.7;
             padding-top: 8px;
+            overflow-wrap: anywhere;
         }
 
         .detail a {
-            color: #0756a5;
+            display: inline-block;
+            color: white;
+            background: #0756a5;
+            padding: 9px 13px;
+            border-radius: 7px;
             font-weight: bold;
+            text-decoration: none;
+            margin-top: 5px;
         }
 
+        .detail a:hover {
+            background: #1684d8;
+        }
+
+        /* FOOTER */
         footer {
+            margin-top: 50px;
+            padding: 28px 15px;
             text-align: center;
-            padding: 20px;
-            color: #7b8794;
-            font-size: 12px;
+            color: #73849a;
+            background: #e6eef7;
+            border-top: 1px solid #d6e3f0;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        footer p {
+            margin: 4px 0;
+        }
+
+        footer strong {
+            color: #0756a5;
+        }
+
+        footer a {
+            color: #0756a5;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* MOBILE */
+        @media (max-width: 650px) {
+            header {
+                padding: 32px 18px;
+            }
+
+            header h1 {
+                font-size: 24px;
+            }
+
+            header p {
+                font-size: 14px;
+                line-height: 1.5;
+            }
+
+            main {
+                margin: 20px auto;
+                padding: 0 13px;
+            }
+
+            .search-box {
+                padding: 17px;
+            }
+
+            .filter-row {
+                grid-template-columns: 1fr;
+            }
+
+            #jobList {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .section-title {
+                font-size: 19px;
+            }
+
+            .job {
+                padding: 16px;
+            }
+
+            .section-heading {
+                margin-top: 23px;
+            }
         }
     </style>
 </head>
@@ -118,70 +314,71 @@
 <body>
 
 <header>
-    <h1>VIỆC LÀM HẢI PHÒNG</h1>
-    <p>Cập nhật việc làm kỹ thuật tại Hải Phòng</p>
+    <div class="header-content">
+        <h1>VIỆC LÀM HẢI PHÒNG</h1>
+        <p>Cập nhật cơ hội việc làm mới nhất tại Hải Phòng</p>
+        <span class="header-tag">Kết nối cơ hội - Phát triển nghề nghiệp</span>
+    </div>
 </header>
 
 <main>
 
-    <input class="search"
-           type="search"
-           placeholder="Tìm công ty, vị trí, khu vực...">
+    <section class="search-box">
+        <h2 class="search-title">Tìm kiếm việc làm</h2>
 
-    <h2 class="section-title">Việc làm mới nhất</h2>
+        <div class="filter-row">
+            <input
+                class="search"
+                id="keywordSearch"
+                type="search"
+                placeholder="Nhập công ty, vị trí, khu vực..."
+            >
+
+            <select id="salaryFilter" class="search">
+                <option value="all">Tất cả mức lương</option>
+                <option value="under7">Dưới 7 triệu</option>
+                <option value="7-10">7 - 10 triệu</option>
+                <option value="10-15">10 - 15 triệu</option>
+                <option value="15-20">15 - 20 triệu</option>
+                <option value="over20">Trên 20 triệu</option>
+                <option value="negotiable">Thỏa thuận</option>
+                <option value="unknown">Không ghi mức lương</option>
+            </select>
+        </div>
+    </section>
+
+    <div class="section-heading">
+        <h2 class="section-title">Việc làm mới nhất</h2>
+        <span id="jobCount" class="job-count"></span>
+    </div>
 
     <div id="jobList">
-    <p>Đang tải danh sách việc làm...</p>
-</div>
+        <p>Đang tải danh sách việc làm...</p>
+    </div>
 
 </main>
 
 <footer>
-    VIỆC LÀM HẢI PHÒNG
+    <p>© 2026 VIỆC LÀM HẢI PHÒNG</p>
+    <p>Developed by <strong>Luong Fix</strong></p>
+    <p>
+        ✉ <a href="mailto:tuanluongpham@gmail.com">
+        tuanluongpham@gmail.com</a>
+    </p>
 </footer>
-
 
 <script>
 
 const sheetURL = "https://script.google.com/macros/s/AKfycbzHhfEqDIkS7Q3tZm9rw0CNUJRvVp2uZQRh592Gqou3ret4Rs4jpftP1UgVEZBBoannAA/exec";
 
 const jobList = document.getElementById("jobList");
-const searchInput = document.querySelector(".search");
+const searchInput = document.getElementById("keywordSearch");
+const salaryFilter = document.getElementById("salaryFilter");
+const jobCount = document.getElementById("jobCount");
 
-function parseCSV(text) {
-    const rows = [];
-    let row = [];
-    let value = "";
-    let quoted = false;
+let allJobs = [];
 
-    for (let i = 0; i < text.length; i++) {
-        const c = text[i];
-
-        if (c === '"' && quoted && text[i + 1] === '"') {
-            value += '"';
-            i++;
-        } else if (c === '"') {
-            quoted = !quoted;
-        } else if (c === "," && !quoted) {
-            row.push(value);
-            value = "";
-        } else if ((c === "\n" || c === "\r") && !quoted) {
-            if (c === "\r" && text[i + 1] === "\n") i++;
-            row.push(value);
-            if (row.some(cell => cell.trim() !== "")) rows.push(row);
-            row = [];
-            value = "";
-        } else {
-            value += c;
-        }
-    }
-
-    row.push(value);
-    if (row.some(cell => cell.trim() !== "")) rows.push(row);
-
-    return rows;
-}
-
+/* CHUYỂN DỮ LIỆU THÀNH CHỮ AN TOÀN */
 function escapeHTML(value) {
     return String(value || "").replace(/[&<>"']/g, char => ({
         "&": "&amp;",
@@ -192,60 +389,138 @@ function escapeHTML(value) {
     })[char]);
 }
 
+/* NHẬN DỮ LIỆU TỪ GOOGLE SHEET */
 function displayJobs(rows) {
-    const jobs = rows.slice(1).filter(row =>
-        row[1] && row[10] !== "Đã tuyển"
+    allJobs = rows.slice(1).filter(row =>
+        row[1] && String(row[10] || "").trim() !== "Đã tuyển"
     );
 
+    applyFilters();
+}
+
+/* LỌC TỪ KHÓA VÀ MỨC LƯƠNG */
+function applyFilters() {
+
+    const keyword = searchInput.value.toLowerCase().trim();
+    const salary = salaryFilter.value;
+
+    const jobs = allJobs.filter(row => {
+
+        const text = row.join(" ").toLowerCase();
+        const salaryText = String(row[4] || "").toLowerCase();
+
+        const matchKeyword = text.includes(keyword);
+
+        const numbers = salaryText.match(/\d+(?:[.,]\d+)?/g);
+
+        const min = numbers
+            ? parseFloat(numbers[0].replace(",", "."))
+            : null;
+
+        const max = numbers && numbers.length > 1
+            ? parseFloat(numbers[1].replace(",", "."))
+            : min;
+
+        let matchSalary = true;
+
+        if (salary === "under7") {
+            matchSalary = min !== null && min < 7;
+        } else if (salary === "7-10") {
+            matchSalary = min !== null && max >= 7 && min <= 10;
+        } else if (salary === "10-15") {
+            matchSalary = min !== null && max >= 10 && min <= 15;
+        } else if (salary === "15-20") {
+            matchSalary = min !== null && max >= 15 && min <= 20;
+        } else if (salary === "over20") {
+            matchSalary = max !== null && max > 20;
+        } else if (salary === "negotiable") {
+            matchSalary = salaryText.includes("thỏa thuận");
+        } else if (salary === "unknown") {
+            matchSalary = !salaryText || !numbers;
+        }
+
+        return matchKeyword && matchSalary;
+    });
+
+    renderJobs(jobs);
+}
+
+/* HIỂN THỊ DANH SÁCH VIỆC LÀM */
+function renderJobs(jobs) {
+
+    jobCount.textContent = "Tìm thấy " + jobs.length + " việc làm";
+
     if (jobs.length === 0) {
-        jobList.innerHTML = "<p>Chưa có tin tuyển dụng.</p>";
+        jobList.innerHTML =
+            "<p>Không tìm thấy việc làm phù hợp. Bạn hãy thử từ khóa khác.</p>";
         return;
     }
 
     jobList.innerHTML = jobs.map(row => `
         <div class="job">
+
             <h3>${escapeHTML(row[1])}</h3>
+
             <p>🏢 Công ty: ${escapeHTML(row[2])}</p>
+
             <p>📍 Khu vực: ${escapeHTML(row[3])}</p>
-            <p class="salary">💰 Lương: ${escapeHTML(row[4])}</p>
+
+            <p class="salary">
+                💰 Lương: ${escapeHTML(row[4] || "Chưa cập nhật")}
+            </p>
+
             <details>
                 <summary>Xem chi tiết công việc ▼</summary>
+
                 <div class="detail">
+
                     <p>${escapeHTML(row[5])}</p>
-                    <p>Yêu cầu: ${escapeHTML(row[6])}</p>
-                    <p>Hạn nộp: ${escapeHTML(row[7])}</p>
-                    <p>Ngày cập nhật: ${escapeHTML(row[9])}</p>
-                    <p>Trạng thái: ${escapeHTML(row[10])}</p>
-                    ${row[8] ? `<p><a href="${escapeHTML(row[8])}" target="_blank" rel="noopener">Xem tin tuyển dụng gốc</a></p>` : ""}
+
+                    <p><strong>Yêu cầu:</strong> ${escapeHTML(row[6])}</p>
+
+                    <p><strong>Hạn nộp:</strong> ${escapeHTML(row[7])}</p>
+
+                    <p><strong>Ngày cập nhật:</strong> ${escapeHTML(row[9])}</p>
+
+                    <p><strong>Trạng thái:</strong> ${escapeHTML(row[10])}</p>
+
+                    ${row[8]
+                        ? `<p><a href="${escapeHTML(row[8])}" target="_blank" rel="noopener noreferrer">Xem tin tuyển dụng gốc ↗</a></p>`
+                        : ""
+                    }
+
                 </div>
             </details>
+
         </div>
     `).join("");
 }
 
+/* TẢI DỮ LIỆU */
 fetch(sheetURL)
     .then(response => {
-        if (!response.ok) throw new Error("Không tải được dữ liệu");
+        if (!response.ok) {
+            throw new Error("Không tải được dữ liệu");
+        }
         return response.json();
     })
-    .then(data => displayJobs(data))
+    .then(data => {
+        displayJobs(data);
+    })
     .catch(error => {
-        jobList.innerHTML = "<p>Chưa kết nối được dữ liệu. Vui lòng thử lại sau.</p>";
-        console.error(error);
+        jobList.innerHTML =
+            "<p>Chưa kết nối được dữ liệu. Vui lòng thử lại sau.</p>";
+
+        jobCount.textContent = "";
+
+        console.error("Lỗi tải dữ liệu:", error);
     });
 
-if (searchInput) {
-    searchInput.addEventListener("input", function () {
-        const keyword = this.value.toLowerCase().trim();
-
-        document.querySelectorAll(".job").forEach(job => {
-            job.style.display = job.innerText.toLowerCase().includes(keyword)
-                ? "block"
-                : "none";
-        });
-    });
-}
+/* SỰ KIỆN TÌM KIẾM VÀ LỌC */
+searchInput.addEventListener("input", applyFilters);
+salaryFilter.addEventListener("change", applyFilters);
 
 </script>
 
+</body>
 </html>
