@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Việc làm Hải Phòng</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f3f5f8;
+            color: #263445;
+        }
+
+        header {
+            background: #0756a5;
+            color: white;
+            padding: 25px 18px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 23px;
+        }
+
+        header p {
+            margin: 8px 0 0;
+            font-size: 14px;
+            color: #dcecff;
+        }
+
+        main {
+            max-width: 650px;
+            margin: auto;
+            padding: 18px 14px;
+        }
+
+        .search {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #d5dce5;
+            border-radius: 10px;
+            font-size: 16px;
+            margin-bottom: 18px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            margin-bottom: 14px;
+        }
+
+        .job {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border: 1px solid #e2e7ed;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+        }
+
+        .job h3 {
+            color: #0756a5;
+            font-size: 17px;
+            margin: 0 0 9px;
+        }
+
+        .job p {
+            font-size: 14px;
+            margin: 6px 0;
+            line-height: 1.5;
+        }
+
+        .salary {
+            color: #16834b;
+            font-weight: bold;
+        }
+
+        details {
+            margin-top: 12px;
+            border-top: 1px solid #edf0f3;
+            padding-top: 10px;
+        }
+
+        summary {
+            color: #0756a5;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 5px 0;
+        }
+
+        .detail {
+            font-size: 14px;
+            line-height: 1.6;
+            padding-top: 8px;
+        }
+
+        .detail a {
+            color: #0756a5;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #7b8794;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>VIỆC LÀM HẢI PHÒNG</h1>
+    <p>Cập nhật việc làm kỹ thuật tại Hải Phòng</p>
+</header>
+
+<main>
+
+    <input class="search"
+           type="search"
+           placeholder="Tìm công ty, vị trí, khu vực...">
+
+    <h2 class="section-title">Việc làm mới nhất</h2>
+
+    <div id="jobList">
+    <p>Đang tải danh sách việc làm...</p>
+</div>
+
+</main>
+
+<footer>
+    VIỆC LÀM HẢI PHÒNG
+</footer>
+
+
+<script>
+
+const sheetURL = "https://script.google.com/macros/s/AKfycbzHhfEqDIkS7Q3tZm9rw0CNUJRvVp2uZQRh592Gqou3ret4Rs4jpftP1UgVEZBBoannAA/exec";
+
+const jobList = document.getElementById("jobList");
+const searchInput = document.querySelector(".search");
+
+function parseCSV(text) {
+    const rows = [];
+    let row = [];
+    let value = "";
+    let quoted = false;
+
+    for (let i = 0; i < text.length; i++) {
+        const c = text[i];
+
+        if (c === '"' && quoted && text[i + 1] === '"') {
+            value += '"';
+            i++;
+        } else if (c === '"') {
+            quoted = !quoted;
+        } else if (c === "," && !quoted) {
+            row.push(value);
+            value = "";
+        } else if ((c === "\n" || c === "\r") && !quoted) {
+            if (c === "\r" && text[i + 1] === "\n") i++;
+            row.push(value);
+            if (row.some(cell => cell.trim() !== "")) rows.push(row);
+            row = [];
+            value = "";
+        } else {
+            value += c;
+        }
+    }
+
+    row.push(value);
+    if (row.some(cell => cell.trim() !== "")) rows.push(row);
+
+    return rows;
+}
+
+function escapeHTML(value) {
+    return String(value || "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    })[char]);
+}
+
+function displayJobs(rows) {
+    const jobs = rows.slice(1).filter(row =>
+        row[1] && row[10] !== "Đã tuyển"
+    );
+
+    if (jobs.length === 0) {
+        jobList.innerHTML = "<p>Chưa có tin tuyển dụng.</p>";
+        return;
+    }
+
+    jobList.innerHTML = jobs.map(row => `
+        <div class="job">
+            <h3>${escapeHTML(row[1])}</h3>
+            <p>🏢 Công ty: ${escapeHTML(row[2])}</p>
+            <p>📍 Khu vực: ${escapeHTML(row[3])}</p>
+            <p class="salary">💰 Lương: ${escapeHTML(row[4])}</p>
+            <details>
+                <summary>Xem chi tiết công việc ▼</summary>
+                <div class="detail">
+                    <p>${escapeHTML(row[5])}</p>
+                    <p>Yêu cầu: ${escapeHTML(row[6])}</p>
+                    <p>Hạn nộp: ${escapeHTML(row[7])}</p>
+                    <p>Ngày cập nhật: ${escapeHTML(row[9])}</p>
+                    <p>Trạng thái: ${escapeHTML(row[10])}</p>
+                    ${row[8] ? `<p><a href="${escapeHTML(row[8])}" target="_blank" rel="noopener">Xem tin tuyển dụng gốc</a></p>` : ""}
+                </div>
+            </details>
+        </div>
+    `).join("");
+}
+
+fetch(sheetURL)
+    .then(response => {
+        if (!response.ok) throw new Error("Không tải được dữ liệu");
+        return response.json();
+    })
+    .then(data => displayJobs(data))
+    .catch(error => {
+        jobList.innerHTML = "<p>Chưa kết nối được dữ liệu. Vui lòng thử lại sau.</p>";
+        console.error(error);
+    });
+
+if (searchInput) {
+    searchInput.addEventListener("input", function () {
+        const keyword = this.value.toLowerCase().trim();
+
+        document.querySelectorAll(".job").forEach(job => {
+            job.style.display = job.innerText.toLowerCase().includes(keyword)
+                ? "block"
+                : "none";
+        });
+    });
+}
+
+</script>
+
+</html>
