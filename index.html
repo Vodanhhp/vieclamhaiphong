@@ -42,18 +42,16 @@
             top: -145px;
         }
 
-        .header-content {
-            max-width: 1050px;
-            margin: auto;
-            position: relative;
-            z-index: 1;
-        }
+      .header-content {
+    text-align: center;
+}
 
-        header h1 {
-            margin: 0;
-            font-size: 30px;
-            letter-spacing: 1px;
-        }
+      header h1 {
+    margin: 0;
+    font-size: 30px;
+    letter-spacing: 1px;
+    text-align: center;
+}
 
         header p {
             margin: 12px 0 0;
@@ -95,8 +93,25 @@
 
         .filter-row {
             display: grid;
-            grid-template-columns: 1fr 250px;
+            grid-template-columns: minmax(0, 1fr) 250px auto;
             gap: 12px;
+            align-items: stretch;
+        }
+
+        .search-button {
+            padding: 0 22px;
+            border: 0;
+            border-radius: 9px;
+            background: #0756a5;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .search-button:hover {
+            background: #1684d8;
         }
 
         .search {
@@ -291,6 +306,10 @@
                 grid-template-columns: 1fr;
             }
 
+            .search-button {
+                min-height: 46px;
+            }
+
             #jobList {
                 grid-template-columns: 1fr;
                 gap: 12px;
@@ -344,6 +363,10 @@
                 <option value="negotiable">Thỏa thuận</option>
                 <option value="unknown">Không ghi mức lương</option>
             </select>
+
+            <button id="searchButton" class="search-button" type="button">
+                Tìm kiếm
+            </button>
         </div>
     </section>
 
@@ -519,6 +542,10 @@ fetch(sheetURL)
 /* SỰ KIỆN TÌM KIẾM VÀ LỌC */
 searchInput.addEventListener("input", applyFilters);
 salaryFilter.addEventListener("change", applyFilters);
+document.getElementById("searchButton").addEventListener("click", applyFilters);
+searchInput.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") applyFilters();
+});
 
 </script>
 
