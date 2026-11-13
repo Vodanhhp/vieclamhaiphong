@@ -23,7 +23,9 @@
 
         /* HEADER */
         header {
-            background: linear-gradient(120deg, #06366d, #0756a5, #1684d8);
+            background:
+                linear-gradient(120deg, rgba(3, 45, 91, 0.58), rgba(7, 86, 165, 0.38)),
+                url("banner-haiphong.png") center center / cover no-repeat;
             color: white;
             padding: 42px 20px;
             position: relative;
@@ -31,42 +33,36 @@
             box-shadow: 0 4px 15px rgba(0, 45, 100, 0.18);
         }
 
-        header::after {
-            content: "";
-            position: absolute;
-            width: 260px;
-            height: 260px;
-            border: 35px solid rgba(255,255,255,0.07);
-            border-radius: 50%;
-            right: 8%;
-            top: -145px;
+        .header-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
         }
 
-      .header-content {
-    text-align: center;
-}
-
-      header h1 {
-    margin: 0;
-    font-size: 30px;
-    letter-spacing: 1px;
-    text-align: center;
-}
+        header h1 {
+            margin: 0;
+            font-size: 30px;
+            letter-spacing: 1px;
+            text-align: center;
+            text-shadow: 0 2px 5px rgba(0, 25, 60, 0.35);
+        }
 
         header p {
             margin: 12px 0 0;
             font-size: 15px;
-            color: #dcecff;
+            color: #f0f7ff;
+            text-shadow: 0 1px 4px rgba(0, 25, 60, 0.35);
         }
 
         .header-tag {
             display: inline-block;
             margin-top: 20px;
             padding: 7px 13px;
-            border: 1px solid rgba(255,255,255,0.35);
+            border: 1px solid rgba(255,255,255,0.55);
             border-radius: 30px;
             font-size: 12px;
-            color: #eaf5ff;
+            color: #ffffff;
+            background: rgba(0, 55, 110, 0.18);
         }
 
         /* MAIN */
@@ -352,7 +348,20 @@
                 type="search"
                 placeholder="Nhập công ty, vị trí, khu vực..."
             >
-
+<select id="industryFilter" class="search">
+    <option value="all">Tất cả ngành nghề</option>
+    <option value="accounting">Kế toán – Tài chính</option>
+    <option value="business">Kinh doanh – Thương mại</option>
+    <option value="hr">Nhân sự – Hành chính</option>
+    <option value="office">Quản trị – Văn phòng</option>
+    <option value="logistics">Logistics – Xuất nhập khẩu</option>
+    <option value="technical">Kỹ thuật – Sản xuất</option>
+    <option value="service">Dịch vụ – Bán hàng</option>
+    <option value="security">Bảo vệ – An ninh</option>
+<option value="it">Công nghệ thông tin (IT)</option>
+<option value="driver">Tài xế – Lái xe</option>
+<option value="labor">Lao động phổ thông</option>
+</select>
             <select id="salaryFilter" class="search">
                 <option value="all">Tất cả mức lương</option>
                 <option value="under7">Dưới 7 triệu</option>
@@ -397,6 +406,7 @@ const sheetURL = "https://script.google.com/macros/s/AKfycbzHhfEqDIkS7Q3tZm9rw0C
 const jobList = document.getElementById("jobList");
 const searchInput = document.getElementById("keywordSearch");
 const salaryFilter = document.getElementById("salaryFilter");
+const industryFilter = document.getElementById("industryFilter");
 const jobCount = document.getElementById("jobCount");
 
 let allJobs = [];
@@ -426,10 +436,11 @@ function applyFilters() {
 
     const keyword = searchInput.value.toLowerCase().trim();
     const salary = salaryFilter.value;
-
+const industry = industryFilter.value;
     const jobs = allJobs.filter(row => {
 
         const text = row.join(" ").toLowerCase();
+        const titleText = String(row[1] || "").toLowerCase();
         const salaryText = String(row[4] || "").toLowerCase();
 
         const matchKeyword = text.includes(keyword);
@@ -462,7 +473,132 @@ function applyFilters() {
             matchSalary = !salaryText || !numbers;
         }
 
-        return matchKeyword && matchSalary;
+      
+   
+const categoryKeywords = {
+    accounting: [
+        "kế toán", "kiểm toán", "tài chính", "thuế",
+        "công nợ", "ngân quỹ", "kế toán nội bộ",
+        "kế toán trưởng", "kế toán kho", "kế toán tổng hợp",
+        "kế toán thanh toán", "kế toán bán hàng",
+        "kế toán xuất nhập khẩu", "kiểm soát tài chính"
+    ],
+
+    business: [
+        "kinh doanh", "sales", "bán hàng",
+        "phát triển thị trường", "phát triển kinh doanh",
+        "trưởng phòng kinh doanh", "nhân viên kinh doanh",
+        "giám đốc kinh doanh", "tư vấn bán hàng",
+        "tư vấn khách hàng", "chuyên viên kinh doanh",
+        "thương mại", "sales admin", "quản lý khách hàng",
+        "đại diện kinh doanh", "phát triển đại lý"
+    ],
+
+    hr: [
+        "nhân sự", "tuyển dụng", "hành chính nhân sự",
+        "chấm công", "tiền lương", "c&b",
+        "quan hệ lao động", "đào tạo nhân viên",
+        "chuyên viên nhân sự", "trưởng phòng nhân sự",
+        "quản lý nhân sự", "bảo hiểm xã hội"
+    ],
+
+    office: [
+        "hành chính", "văn phòng", "trợ lý", "thư ký",
+        "điều phối", "admin", "quản trị",
+        "giám đốc điều hành", "phó giám đốc",
+        "giám đốc dự án", "trưởng phòng",
+        "quản lý văn phòng", "quản lý điều hành",
+        "nhân viên văn thư", "tổng giám đốc",
+        "giám đốc chất lượng"
+    ],
+
+    logistics: [
+        "logistics", "xuất nhập khẩu", "chứng từ",
+        "hải quan", "kho vận", "vận tải", "giao nhận",
+        "quản lý kho", "thủ kho", "nhân viên kho",
+        "điều phối vận tải", "chuỗi cung ứng",
+        "supply chain", "mua hàng", "thu mua",
+        "vận chuyển", "nguyên vật liệu", "quản lý hàng hóa"
+    ],
+
+    technical: [
+    "kỹ thuật viên", "nhân viên kỹ thuật",
+    "kỹ sư", "kỹ thuật cơ điện",
+    "kỹ thuật điện", "kỹ thuật cơ khí",
+    "kỹ thuật bảo trì", "nhân viên bảo trì",
+    "bảo trì", "cơ điện", "điện công nghiệp",
+    "thợ điện", "thợ máy", "thợ cơ khí",
+    "tự động hóa", "plc",
+    "vận hành máy", "công nhân vận hành",
+    "công nhân sản xuất", "lao động kỹ thuật",
+    "kỹ thuật may", "dệt", "giày dép",
+    "sản xuất thùng hộp", "hướng dẫn sản xuất",
+    "quản lý sản xuất", "giám sát sản xuất",
+    "trưởng phòng sản xuất", "giám đốc sản xuất",
+    "quản lý kỹ thuật sản xuất",
+    "kiểm soát chất lượng", "quản lý chất lượng",
+    "giám đốc chất lượng", "trưởng phòng chất lượng",
+    "qc", "qa"
+],
+
+   service: [
+    "dịch vụ", "nhà hàng", "khách sạn",
+    "lễ tân", "phục vụ", "bếp", "spa",
+    "du lịch", "chăm sóc khách hàng",
+    "nhân viên chăm sóc khách hàng",
+    "tổng đài viên", "buồng phòng",
+    "pha chế", "đầu bếp", "nhân viên phục vụ",
+    "bán lẻ", "thu ngân", "tiếp tân"
+],
+
+security: [
+    "bảo vệ", "nhân viên an ninh",
+    "nhân viên bảo vệ", "bảo vệ cổng",
+    "bảo vệ giám sát", "giám sát bảo vệ",
+    "trưởng ca bảo vệ", "đội trưởng bảo vệ",
+    "nhân viên kiểm soát an ninh",
+    "nhân viên tuần tra"
+],
+
+it: [
+    "nhân viên it", "kỹ thuật viên it",
+    "chuyên viên it", "quản trị viên it",
+    "it support", "it helpdesk",
+    "helpdesk", "lập trình viên",
+    "lập trình web", "web developer",
+    "software developer", "developer",
+    "system administrator", "quản trị mạng",
+    "quản trị hệ thống", "kỹ sư phần mềm",
+    "kiểm thử phần mềm", "tester",
+    "chuyên viên công nghệ thông tin",
+    "nhân viên công nghệ thông tin"
+],
+driver: [
+    "tài xế", "lái xe", "lái xe tải",
+    "lái xe container", "lái xe đầu kéo",
+    "lái xe công ty", "lái xe nâng",
+    "nhân viên lái xe", "tài xế giao hàng",
+    "nhân viên giao hàng", "phụ xe"
+],
+
+labor: [
+    "lao động phổ thông", "công nhân",
+    "công nhân thời vụ", "đóng gói",
+    "đóng hàng", "bốc xếp", "phụ kho",
+    "tạp vụ", "vệ sinh công nghiệp",
+    "nhân viên vệ sinh", "nhân viên kho",
+    "sơ chế", "chế biến thực phẩm",
+    "lắp ráp", "kiểm hàng", "phân loại hàng"
+]
+};
+
+
+const matchIndustry = industry === "all" ||
+   (["security", "it", "driver", "labor"].includes(industry)
+        ? categoryKeywords[industry].some(word => titleText.includes(word))
+        : categoryKeywords[industry].some(word => text.includes(word)));
+
+return matchKeyword && matchSalary && matchIndustry;
     });
 
     renderJobs(jobs);
@@ -540,14 +676,18 @@ fetch(sheetURL)
     });
 
 /* SỰ KIỆN TÌM KIẾM VÀ LỌC */
-searchInput.addEventListener("input", applyFilters);
-salaryFilter.addEventListener("change", applyFilters);
+
 document.getElementById("searchButton").addEventListener("click", applyFilters);
 searchInput.addEventListener("keydown", function(event) {
     if (event.key === "Enter") applyFilters();
 });
 
 </script>
-
+<a href="https://docs.google.com/forms/d/e/1FAIpQLScLptlwm4EdVJsAj2u7XMB4mtDKW_FicnZOJNmyE6ZGsCnLLw/viewform?usp=publish-editor"
+   target="_blank"
+   rel="noopener noreferrer"
+   style="position:fixed; right:20px; bottom:20px; z-index:9999; padding:13px 18px; background:#2563eb; color:white; text-decoration:none; border-radius:30px; font-weight:bold; box-shadow:0 3px 10px rgba(0,0,0,0.25);">
+   ✉ Gửi phản hồi
+</a>
 </body>
 </html>
