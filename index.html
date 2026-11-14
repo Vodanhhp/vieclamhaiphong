@@ -841,6 +841,12 @@ const matchIndustry = industry === "all" ||
     );
 
 return matchKeyword && matchSalary && matchIndustry;
+    });
+
+    console.log("Số tin sau lọc:", jobs.length);
+    renderJobs(jobs);
+}
+
 /* HIỂN THỊ DANH SÁCH VIỆC LÀM */
 function renderJobs(jobs) {
 
