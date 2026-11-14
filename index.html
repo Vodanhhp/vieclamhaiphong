@@ -924,22 +924,27 @@ searchInput.addEventListener("keydown", function(event) {
 </script>
 
 
+
 <!-- BỘ ĐẾM LƯỢT TRUY CẬP -->
-<div style="text-align:center; margin:12px auto 65px; color:#94a3b8; font-size:11px;">
+<div style="text-align:center; margin:10px auto 65px; color:#94a3b8; font-size:11px;">
     Lượt truy cập: <span id="goatcounter-count">...</span>
 </div>
 
 <script>
-(function () {
-    if (window.goatcounter && window.goatcounter.visit_count) {
-        window.goatcounter.visit_count({
-            append: '#goatcounter-count',
-            path: 'TOTAL',
-            no_branding: true
-        });
-    }
-})();
+fetch('https://vieclamhaiphong.goatcounter.com/counter/TOTAL.json')
+    .then(response => {
+        if (!response.ok) throw new Error('Không lấy được số liệu');
+        return response.json();
+    })
+    .then(data => {
+        document.getElementById('goatcounter-count').textContent = data.count;
+    })
+    .catch(error => {
+        document.getElementById('goatcounter-count').textContent = 'Chưa có dữ liệu';
+        console.error('GoatCounter:', error);
+    });
 </script>
+
 
 <a href="https://docs.google.com/forms/d/e/1FAIpQLScLptlwm4EdVJsAj2u7XMB4mtDKW_FicnZOJNmyE6ZGsCnLLw/viewform?usp=publish-editor"
  
