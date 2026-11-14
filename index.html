@@ -923,27 +923,21 @@ searchInput.addEventListener("keydown", function(event) {
 
 </script>
 
+
 <!-- BỘ ĐẾM LƯỢT TRUY CẬP -->
-<div style="text-align:center; margin:25px auto 75px; padding:12px; color:#64748b; font-size:14px;">
-    <div style="font-weight:bold; margin-bottom:6px;">
-        📊 Tổng lượt truy cập website
-    </div>
-    <div id="goatcounter-count"></div>
+<div style="text-align:center; margin:12px auto 65px; color:#94a3b8; font-size:11px;">
+    Lượt truy cập: <span id="goatcounter-count">...</span>
 </div>
 
 <script>
 (function () {
-    const timer = setInterval(function () {
-        if (window.goatcounter && window.goatcounter.visit_count) {
-            clearInterval(timer);
-
-            window.goatcounter.visit_count({
-                append: '#goatcounter-count',
-                path: 'TOTAL',
-                no_branding: true
-            });
-        }
-    }, 100);
+    if (window.goatcounter && window.goatcounter.visit_count) {
+        window.goatcounter.visit_count({
+            append: '#goatcounter-count',
+            path: 'TOTAL',
+            no_branding: true
+        });
+    }
 })();
 </script>
 
