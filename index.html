@@ -827,10 +827,23 @@ labor: [
 
 
 const matchIndustry = industry === "all" ||
-   (["security", "it", "driver", "labor"].includes(industry)
-        ? categoryKeywords[industry].some(word => titleText.includes(word))
-        : categoryKeywords[industry].some(word => text.includes(word)));
-
+    (industry === "environment"
+        ? categoryKeywords[industry].some(word =>
+            titleText.includes(word) ||
+            (
+                ["xử lý nước thải", "quan trắc môi trường",
+                 "xử lý chất thải", "xử lý khí thải",
+                 "vận hành hệ thống xử lý nước thải",
+                 "kỹ thuật môi trường"].some(term =>
+                    normalizedText.includes(normalizeText(term))
+                 )
+            )
+          )
+        : (["security", "it", "driver", "labor"].includes(industry)
+            ? categoryKeywords[industry].some(word => titleText.includes(word))
+            : categoryKeywords[industry].some(word => text.includes(word))
+          )
+    );
 return matchKeyword && matchSalary && matchIndustry;
     });
 console.log("Số tin sau lọc:", jobs.length);
