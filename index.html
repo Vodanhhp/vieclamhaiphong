@@ -842,7 +842,7 @@ const matchIndustry = industry === "all" ||
         ? categoryKeywords[industry].some(word =>
             normalizeText(titleText).includes(normalizeText(word))
           )
-        : (["security", "it", "driver", "labor"].includes(industry)
+        : (["security", "it", "driver", "labor", "logistics"].includes(industry)
             ? categoryKeywords[industry].some(word =>
                 normalizeText(titleText).includes(normalizeText(word))
               )
