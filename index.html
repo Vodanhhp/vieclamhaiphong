@@ -573,129 +573,6 @@ console.log("Từ khóa chuẩn hóa:", normalizedKeyword);
 console.log("Danh sách từ khóa tìm kiếm:", searchTerms);
 
 console.log("Ngành đang chọn:", industry);
-console.log("Từ khóa môi trường:", categoryKeywords.environment);
-const jobs = allJobs.filter(row => {
-
-        const text = row.join(" ").toLowerCase();
-        const titleText = String(row[1] || "").toLowerCase();
-        const salaryText = String(row[4] || "").toLowerCase();
-
-        const normalizedText = normalizeText(text);
-
-const acronymKeywords = ["hr", "it", "qc", "qa"];
-
-const titleNormalized = normalizeText(titleText);
-
-const hrTerms = [
-    "hr",
-    "nhan su",
-    "human resources",
-    "tuyen dung",
-    "recruitment",
-    "hanh chinh nhan su",
-    "hanh chinh",
-    "cham cong",
-    "tien luong",
-    "c&b",
-    "bao hiem",
-    "phuc loi",
-    "quan he lao dong",
-    "hr manager",
-    "hr specialist",
-    "hr staff"
-];
-
-// Các chức danh liên quan đến bảo trì
-
-const maintenanceTerms = [
-    // Bảo trì, bảo dưỡng
-    "bao tri",
-    "bao duong",
-    "sua chua may",
-    "sua chua thiet bi",
-    "bao duong may",
-    "bao duong thiet bi",
-    "ky thuat bao tri",
-    "nhan vien bao tri",
-    "ky thuat vien bao tri",
-    "bao tri dien",
-    "bao tri co dien",
-    "maintenance",
-
-    // Cơ điện
-    "co dien",
-    "ky thuat co dien",
-    "ky su co dien",
-    "nhan vien co dien",
-    "dien cong nghiep",
-    "ky thuat dien",
-    "ky thuat vien dien",
-    "ky thuat vien me",
-    "ky thuat vien thiet bi",
-    "ky thuat vien may",
-    "m&e"
-];
-
-
-let matchKeyword = !normalizedKeyword;
-
-if (normalizedKeyword === "hr") {
-    matchKeyword = hrTerms.some(term => {
-        if (term === "hr") {
-            return /(^|[^a-z0-9])hr([^a-z0-9]|$)/.test(titleNormalized);
-        }
-        return titleNormalized.includes(term);
-    });
-
-} else if (normalizedKeyword === "bao tri") {
-    matchKeyword = maintenanceTerms.some(term =>
-        titleNormalized.includes(term)
-    );
-
-} else {
-    matchKeyword = matchKeyword || searchTerms.some(term => {
-        if (acronymKeywords.includes(normalizedKeyword) && term === normalizedKeyword) {
-            const regex = new RegExp("(^|[^a-z0-9])" + term + "([^a-z0-9]|$)");
-            return regex.test(titleNormalized);
-        }
-        return normalizedText.includes(term);
-    });
-}
-
-
-if (normalizedKeyword === "hr") {
-    console.log(titleText, "=>", matchKeyword);
-}
-        const numbers = salaryText.match(/\d+(?:[.,]\d+)?/g);
-
-        const min = numbers
-            ? parseFloat(numbers[0].replace(",", "."))
-            : null;
-
-        const max = numbers && numbers.length > 1
-            ? parseFloat(numbers[1].replace(",", "."))
-            : min;
-
-        let matchSalary = true;
-
-        if (salary === "under7") {
-            matchSalary = min !== null && min < 7;
-        } else if (salary === "7-10") {
-            matchSalary = min !== null && max >= 7 && min <= 10;
-        } else if (salary === "10-15") {
-            matchSalary = min !== null && max >= 10 && min <= 15;
-        } else if (salary === "15-20") {
-            matchSalary = min !== null && max >= 15 && min <= 20;
-        } else if (salary === "over20") {
-            matchSalary = max !== null && max > 20;
-        } else if (salary === "negotiable") {
-            matchSalary = salaryText.includes("thỏa thuận");
-        } else if (salary === "unknown") {
-            matchSalary = !salaryText || !numbers;
-        }
-
-      
-   
 const categoryKeywords = {
     accounting: [
         "kế toán", "kiểm toán", "tài chính", "thuế",
@@ -824,32 +701,146 @@ labor: [
     "lắp ráp", "kiểm hàng", "phân loại hàng"
 ]
 };
+const jobs = allJobs.filter(row => {
+
+        const text = row.join(" ").toLowerCase();
+        const titleText = String(row[1] || "").toLowerCase();
+        const salaryText = String(row[4] || "").toLowerCase();
+
+        const normalizedText = normalizeText(text);
+
+const acronymKeywords = ["hr", "it", "qc", "qa"];
+
+const titleNormalized = normalizeText(titleText);
+
+const hrTerms = [
+    "hr",
+    "nhan su",
+    "human resources",
+    "tuyen dung",
+    "recruitment",
+    "hanh chinh nhan su",
+    "hanh chinh",
+    "cham cong",
+    "tien luong",
+    "c&b",
+    "bao hiem",
+    "phuc loi",
+    "quan he lao dong",
+    "hr manager",
+    "hr specialist",
+    "hr staff"
+];
+
+// Các chức danh liên quan đến bảo trì
+
+const maintenanceTerms = [
+    // Bảo trì, bảo dưỡng
+    "bao tri",
+    "bao duong",
+    "sua chua may",
+    "sua chua thiet bi",
+    "bao duong may",
+    "bao duong thiet bi",
+    "ky thuat bao tri",
+    "nhan vien bao tri",
+    "ky thuat vien bao tri",
+    "bao tri dien",
+    "bao tri co dien",
+    "maintenance",
+
+    // Cơ điện
+    "co dien",
+    "ky thuat co dien",
+    "ky su co dien",
+    "nhan vien co dien",
+    "dien cong nghiep",
+    "ky thuat dien",
+    "ky thuat vien dien",
+    "ky thuat vien me",
+    "ky thuat vien thiet bi",
+    "ky thuat vien may",
+    "m&e"
+];
+
+
+let matchKeyword = !normalizedKeyword;
+
+if (normalizedKeyword === "hr") {
+    matchKeyword = hrTerms.some(term => {
+        if (term === "hr") {
+            return /(^|[^a-z0-9])hr([^a-z0-9]|$)/.test(titleNormalized);
+        }
+        return titleNormalized.includes(term);
+    });
+
+} else if (normalizedKeyword === "bao tri") {
+    matchKeyword = maintenanceTerms.some(term =>
+        titleNormalized.includes(term)
+    );
+
+} else {
+    matchKeyword = matchKeyword || searchTerms.some(term => {
+        if (acronymKeywords.includes(normalizedKeyword) && term === normalizedKeyword) {
+            const regex = new RegExp("(^|[^a-z0-9])" + term + "([^a-z0-9]|$)");
+            return regex.test(titleNormalized);
+        }
+        return normalizedText.includes(term);
+    });
+}
+
+
+if (normalizedKeyword === "hr") {
+    console.log(titleText, "=>", matchKeyword);
+}
+        const numbers = salaryText.match(/\d+(?:[.,]\d+)?/g);
+
+        const min = numbers
+            ? parseFloat(numbers[0].replace(",", "."))
+            : null;
+
+        const max = numbers && numbers.length > 1
+            ? parseFloat(numbers[1].replace(",", "."))
+            : min;
+
+        let matchSalary = true;
+
+        if (salary === "under7") {
+            matchSalary = min !== null && min < 7;
+        } else if (salary === "7-10") {
+            matchSalary = min !== null && max >= 7 && min <= 10;
+        } else if (salary === "10-15") {
+            matchSalary = min !== null && max >= 10 && min <= 15;
+        } else if (salary === "15-20") {
+            matchSalary = min !== null && max >= 15 && min <= 20;
+        } else if (salary === "over20") {
+            matchSalary = max !== null && max > 20;
+        } else if (salary === "negotiable") {
+            matchSalary = salaryText.includes("thỏa thuận");
+        } else if (salary === "unknown") {
+            matchSalary = !salaryText || !numbers;
+        }
+
+      
+   
 
 
 const matchIndustry = industry === "all" ||
     (industry === "environment"
         ? categoryKeywords[industry].some(word =>
-            titleText.includes(word) ||
-            (
-                ["xử lý nước thải", "quan trắc môi trường",
-                 "xử lý chất thải", "xử lý khí thải",
-                 "vận hành hệ thống xử lý nước thải",
-                 "kỹ thuật môi trường"].some(term =>
-                    normalizedText.includes(normalizeText(term))
-                 )
-            )
+            normalizeText(titleText).includes(normalizeText(word))
           )
         : (["security", "it", "driver", "labor"].includes(industry)
-            ? categoryKeywords[industry].some(word => titleText.includes(word))
-            : categoryKeywords[industry].some(word => text.includes(word))
+            ? categoryKeywords[industry].some(word =>
+                normalizeText(titleText).includes(normalizeText(word))
+              )
+            : categoryKeywords[industry].some(word =>
+                normalizedText.includes(normalizeText(word))
+              )
           )
     );
-return matchKeyword && matchSalary && matchIndustry;
-    });
-console.log("Số tin sau lọc:", jobs.length);
-    renderJobs(jobs);
-}
 
+return matchKeyword && matchSalary && matchIndustry;
 /* HIỂN THỊ DANH SÁCH VIỆC LÀM */
 function renderJobs(jobs) {
 
