@@ -501,11 +501,12 @@ const categoryKeywords = {
     "tư vấn bán hàng",
     "nhân viên bán hàng",
     "chuyên viên bán hàng",
-    "sales",
-    "sales admin",
-    "sales executive",
-    "sales manager",
-    "business development"
+   "sales executive",
+"sales manager",
+"sales representative",
+"sales consultant",
+"sales admin",
+"business development"
 ],
 
     hr: [
@@ -859,17 +860,21 @@ if (normalizedKeyword === "hr") {
 
 
 const matchIndustry = industry === "all" ||
-    (industry === "environment"
+    ([
+        "environment",
+        "security",
+        "it",
+        "driver",
+        "labor",
+        "logistics",
+        "office",
+        "business"
+    ].includes(industry)
         ? categoryKeywords[industry].some(word =>
             normalizeText(titleText).includes(normalizeText(word))
           )
-        : (["security", "it", "driver", "labor", "logistics"].includes(industry)
-            ? categoryKeywords[industry].some(word =>
-                normalizeText(titleText).includes(normalizeText(word))
-              )
-            : categoryKeywords[industry].some(word =>
-                normalizedText.includes(normalizeText(word))
-              )
+        : categoryKeywords[industry].some(word =>
+            normalizedText.includes(normalizeText(word))
           )
     );
 
