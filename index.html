@@ -479,100 +479,6 @@ function displayJobs(rows) {
 
     applyFilters();
 }
-
-/* LỌC TỪ KHÓA VÀ MỨC LƯƠNG */
-function applyFilters() {
-
-    const keyword = searchInput.value.toLowerCase().trim();
-    const salary = salaryFilter.value;
-const industry = industryFilter.value;
-
-// Chuẩn hóa chữ để tìm kiếm có hoặc không có dấu
-const normalizeText = str => String(str || "")
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/đ/g, "d");
-
-// Các từ khóa liên quan
-const searchSynonyms = {
-    "to truong": [
-        "truong ca", "truong nhom", "to pho",
-        "giam sat", "quan doc", "quan ly to"
-    ],
-
-    "bao tri": [
-        "ky thuat bao tri", "nhan vien bao tri",
-        "ky thuat vien bao tri", "co dien",
-        "sua chua", "maintenance"
-    ],
-
-    "ky thuat": [
-        "ky thuat vien", "nhan vien ky thuat",
-        "co dien", "dien cong nghiep",
-        "co khi", "bao tri", "sua chua"
-    ],
-
-    "cong nhan": [
-        "lao dong pho thong", "san xuat",
-        "lap rap", "dong goi"
-    ],
-
-    "nhan vien kho": [
-        "thu kho", "quan ly kho",
-        "phu kho", "kiem hang"
-    ],
-
-   "hr": [
-    "nhan su",
-    "human resources",
-    "hanh chinh nhan su",
-    "nhan vien nhan su",
-    "chuyen vien nhan su",
-    "truong phong nhan su",
-    "quan ly nhan su",
-    "hr manager",
-    "hr specialist",
-    "hr staff"
-],
-
-    "it": [
-        "cong nghe thong tin", "it support",
-        "helpdesk", "lap trinh vien",
-        "quan tri mang", "quan tri he thong"
-    ],
-
-    "qc": [
-        "kiem soat chat luong",
-        "kiem tra chat luong",
-        "quality control"
-    ],
-
-    "qa": [
-        "dam bao chat luong",
-        "quan ly chat luong",
-        "quality assurance"
-    ]
-};
-
-const normalizedKeyword = normalizeText(keyword);
-
-const matchedSynonymKey = searchSynonyms[normalizedKeyword]
-    ? normalizedKeyword
-    : null;
-
-const searchTerms = [
-    normalizedKeyword,
-    ...(matchedSynonymKey
-        ? searchSynonyms[matchedSynonymKey]
-        : [])
-].filter(Boolean);
-
-// THÊM 2 DÒNG NÀY
-console.log("Từ khóa chuẩn hóa:", normalizedKeyword);
-console.log("Danh sách từ khóa tìm kiếm:", searchTerms);
-
-console.log("Ngành đang chọn:", industry);
 const categoryKeywords = {
     accounting: [
         "kế toán", "kiểm toán", "tài chính", "thuế",
@@ -701,6 +607,100 @@ labor: [
     "lắp ráp", "kiểm hàng", "phân loại hàng"
 ]
 };
+/* LỌC TỪ KHÓA VÀ MỨC LƯƠNG */
+function applyFilters() {
+
+    const keyword = searchInput.value.toLowerCase().trim();
+    const salary = salaryFilter.value;
+const industry = industryFilter.value;
+
+// Chuẩn hóa chữ để tìm kiếm có hoặc không có dấu
+const normalizeText = str => String(str || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d");
+
+// Các từ khóa liên quan
+const searchSynonyms = {
+    "to truong": [
+        "truong ca", "truong nhom", "to pho",
+        "giam sat", "quan doc", "quan ly to"
+    ],
+
+    "bao tri": [
+        "ky thuat bao tri", "nhan vien bao tri",
+        "ky thuat vien bao tri", "co dien",
+        "sua chua", "maintenance"
+    ],
+
+    "ky thuat": [
+        "ky thuat vien", "nhan vien ky thuat",
+        "co dien", "dien cong nghiep",
+        "co khi", "bao tri", "sua chua"
+    ],
+
+    "cong nhan": [
+        "lao dong pho thong", "san xuat",
+        "lap rap", "dong goi"
+    ],
+
+    "nhan vien kho": [
+        "thu kho", "quan ly kho",
+        "phu kho", "kiem hang"
+    ],
+
+   "hr": [
+    "nhan su",
+    "human resources",
+    "hanh chinh nhan su",
+    "nhan vien nhan su",
+    "chuyen vien nhan su",
+    "truong phong nhan su",
+    "quan ly nhan su",
+    "hr manager",
+    "hr specialist",
+    "hr staff"
+],
+
+    "it": [
+        "cong nghe thong tin", "it support",
+        "helpdesk", "lap trinh vien",
+        "quan tri mang", "quan tri he thong"
+    ],
+
+    "qc": [
+        "kiem soat chat luong",
+        "kiem tra chat luong",
+        "quality control"
+    ],
+
+    "qa": [
+        "dam bao chat luong",
+        "quan ly chat luong",
+        "quality assurance"
+    ]
+};
+
+const normalizedKeyword = normalizeText(keyword);
+
+const matchedSynonymKey = searchSynonyms[normalizedKeyword]
+    ? normalizedKeyword
+    : null;
+
+const searchTerms = [
+    normalizedKeyword,
+    ...(matchedSynonymKey
+        ? searchSynonyms[matchedSynonymKey]
+        : [])
+].filter(Boolean);
+
+// THÊM 2 DÒNG NÀY
+console.log("Từ khóa chuẩn hóa:", normalizedKeyword);
+console.log("Danh sách từ khóa tìm kiếm:", searchTerms);
+
+console.log("Ngành đang chọn:", industry);
+
 const jobs = allJobs.filter(row => {
 
         const text = row.join(" ").toLowerCase();
