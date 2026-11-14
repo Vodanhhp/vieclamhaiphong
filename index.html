@@ -368,8 +368,7 @@
   gtag('js', new Date());
   gtag('config', 'G-23HE4MQ3N9');
 </script>
-<script data-goatcounter="https://vieclamhaiphong.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+
 
 
 
@@ -928,26 +927,8 @@ searchInput.addEventListener("keydown", function(event) {
 
 
 
-<!-- BỘ ĐẾM LƯỢT TRUY CẬP -->
-<div style="text-align:center; margin:10px auto 65px; color:#94a3b8; font-size:11px;">
-    Lượt truy cập: <span id="goatcounter-count">...</span>
-</div>
 
 
-<script>
-
-(function waitForGoatCounter() {
-    if (window.goatcounter && window.goatcounter.visit_count) {
-        window.goatcounter.visit_count({
-            path: 'TOTAL',
-            append: '#goatcounter-count',
-            no_branding: true
-        });
-    } else {
-        setTimeout(waitForGoatCounter, 100);
-    }
-})();
-</script>
 
 
 
@@ -958,5 +939,17 @@ target="_blank"
    style="position:fixed; right:20px; bottom:20px; z-index:9999; padding:13px 18px; background:#2563eb; color:white; text-decoration:none; border-radius:30px; font-weight:bold; box-shadow:0 3px 10px rgba(0,0,0,0.25);">
    ✉ Gửi phản hồi
 </a>
+
+<!-- Bộ đếm lượt truy cập -->
+<div class="counterapi"
+     ns="vieclamhp247.com"
+     key="homepage"
+     action="view"
+     noIcon="true"
+     noCss="true"
+     label="lượt truy cập">
+</div>
+
+<script src="https://counterapi.com/c.js" async></script>
 </body>
 </html>
