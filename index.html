@@ -922,8 +922,34 @@ searchInput.addEventListener("keydown", function(event) {
 });
 
 </script>
+
+<!-- BỘ ĐẾM LƯỢT TRUY CẬP -->
+<div style="text-align:center; margin:25px auto 75px; padding:12px; color:#64748b; font-size:14px;">
+    <div style="font-weight:bold; margin-bottom:6px;">
+        📊 Tổng lượt truy cập website
+    </div>
+    <div id="goatcounter-count"></div>
+</div>
+
+<script>
+(function () {
+    const timer = setInterval(function () {
+        if (window.goatcounter && window.goatcounter.visit_count) {
+            clearInterval(timer);
+
+            window.goatcounter.visit_count({
+                append: '#goatcounter-count',
+                path: 'TOTAL',
+                no_branding: true
+            });
+        }
+    }, 100);
+})();
+</script>
+
 <a href="https://docs.google.com/forms/d/e/1FAIpQLScLptlwm4EdVJsAj2u7XMB4mtDKW_FicnZOJNmyE6ZGsCnLLw/viewform?usp=publish-editor"
-   target="_blank"
+ 
+target="_blank"
    rel="noopener noreferrer"
    style="position:fixed; right:20px; bottom:20px; z-index:9999; padding:13px 18px; background:#2563eb; color:white; text-decoration:none; border-radius:30px; font-weight:bold; box-shadow:0 3px 10px rgba(0,0,0,0.25);">
    ✉ Gửi phản hồi
