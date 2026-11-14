@@ -370,7 +370,10 @@
 </script>
 <script data-goatcounter="https://vieclamhaiphong.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
-</head>
+
+
+
+    </head>
 
 <body>
 
@@ -930,20 +933,22 @@ searchInput.addEventListener("keydown", function(event) {
     Lượt truy cập: <span id="goatcounter-count">...</span>
 </div>
 
+
 <script>
-fetch('https://vieclamhaiphong.goatcounter.com/counter/TOTAL.json')
-    .then(response => {
-        if (!response.ok) throw new Error('Không lấy được số liệu');
-        return response.json();
-    })
-    .then(data => {
-        document.getElementById('goatcounter-count').textContent = data.count;
-    })
-    .catch(error => {
-        document.getElementById('goatcounter-count').textContent = 'Chưa có dữ liệu';
-        console.error('GoatCounter:', error);
-    });
+
+(function waitForGoatCounter() {
+    if (window.goatcounter && window.goatcounter.visit_count) {
+        window.goatcounter.visit_count({
+            path: 'TOTAL',
+            append: '#goatcounter-count',
+            no_branding: true
+        });
+    } else {
+        setTimeout(waitForGoatCounter, 100);
+    }
+})();
 </script>
+
 
 
 <a href="https://docs.google.com/forms/d/e/1FAIpQLScLptlwm4EdVJsAj2u7XMB4mtDKW_FicnZOJNmyE6ZGsCnLLw/viewform?usp=publish-editor"
