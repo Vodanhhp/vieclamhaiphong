@@ -846,23 +846,40 @@ const categoryKeywords = {
     "quản lý kho vận"
 ],
     technical: [
+    // Kỹ thuật, cơ điện, điện
     "kỹ thuật viên", "nhân viên kỹ thuật",
-    "kỹ sư", "kỹ thuật cơ điện",
-    "kỹ thuật điện", "kỹ thuật cơ khí",
-    "kỹ thuật bảo trì", "nhân viên bảo trì",
-    "bảo trì", "cơ điện", "điện công nghiệp",
-    "thợ điện", "thợ máy", "thợ cơ khí",
-    "tự động hóa", "plc",
+    "kỹ sư kỹ thuật", "kỹ sư cơ điện",
+    "kỹ sư điện", "kỹ sư cơ khí",
+    "kỹ thuật cơ điện", "kỹ thuật điện",
+    "kỹ thuật cơ khí", "điện công nghiệp",
+    "điện dân dụng", "thợ điện",
+    "thợ máy", "thợ cơ khí",
+
+    // Bảo trì, sửa chữa
+    "bảo trì", "bảo dưỡng", "nhân viên bảo trì",
+    "kỹ thuật bảo trì", "kỹ sư bảo trì",
+    "nhân viên bảo dưỡng", "kỹ thuật bảo dưỡng",
+    "sửa chữa máy móc", "sửa chữa thiết bị",
+    "cơ điện", "cơ điện tử",
+    "bảo trì thiết bị", "bảo trì máy móc",
+
+    // Tự động hóa, điều khiển
+    "tự động hóa", "plc", "biến tần",
+    "điều khiển công nghiệp", "vận hành hệ thống",
+
+    // Vận hành máy, sản xuất
     "vận hành máy", "công nhân vận hành",
-    "công nhân sản xuất", "lao động kỹ thuật",
-    "kỹ thuật may", "dệt", "giày dép",
-    "sản xuất thùng hộp", "hướng dẫn sản xuất",
-    "quản lý sản xuất", "giám sát sản xuất",
-    "trưởng phòng sản xuất", "giám đốc sản xuất",
-    "quản lý kỹ thuật sản xuất",
+    "lao động kỹ thuật", "kỹ thuật may",
+    "dệt", "giày dép", "sản xuất thùng hộp",
+    "hướng dẫn sản xuất", "quản lý sản xuất",
+    "giám sát sản xuất", "trưởng phòng sản xuất",
+    "giám đốc sản xuất", "quản lý kỹ thuật sản xuất",
+
+    // Kiểm soát chất lượng
     "kiểm soát chất lượng", "quản lý chất lượng",
     "giám đốc chất lượng", "trưởng phòng chất lượng",
-    "qc", "qa"
+    "nhân viên qc", "nhân viên qa",
+    "kỹ thuật qc", "kỹ thuật qa"
 ],
 environment: [
    
@@ -878,13 +895,24 @@ environment: [
 ],
 
    service: [
-    "dịch vụ", "nhà hàng", "khách sạn",
-    "lễ tân", "phục vụ", "bếp", "spa",
-    "du lịch", "chăm sóc khách hàng",
-    "nhân viên chăm sóc khách hàng",
-    "tổng đài viên", "buồng phòng",
-    "pha chế", "đầu bếp", "nhân viên phục vụ",
-    "bán lẻ", "thu ngân", "tiếp tân"
+    // Bán hàng, kinh doanh
+    "bán hàng", "nhân viên bán hàng",
+    "chuyên viên bán hàng", "kinh doanh",
+    "nhân viên kinh doanh", "sales",
+    "sales consultant", "tư vấn bán hàng",
+    "tư vấn sản phẩm", "tư vấn khách hàng",
+
+    // Chăm sóc và dịch vụ khách hàng
+    "chăm sóc khách hàng", "tổng đài viên",
+    "customer service", "customer care",
+
+    // Nhà hàng, khách sạn, du lịch
+    "nhà hàng", "khách sạn", "lễ tân",
+    "phục vụ", "nhân viên phục vụ",
+    "bếp", "đầu bếp", "pha chế",
+    "thu ngân", "buồng phòng", "spa",
+    "du lịch", "điều hành tour",
+    "tiếp tân", "bán lẻ"
 ],
 
 security: [
@@ -1163,7 +1191,9 @@ const matchIndustry = industry === "all" ||
         "labor",
         "logistics",
         "office",
-        "business"
+        "business",
+           "service",
+            "technical"
     ].includes(industry)
         ? categoryKeywords[industry].some(word =>
             normalizeText(titleText).includes(normalizeText(word))
