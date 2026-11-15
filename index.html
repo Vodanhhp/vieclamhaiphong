@@ -366,6 +366,13 @@
     font-size: 12px;
     font-weight: 600;
 }
+
+#industryFilter:disabled {
+    opacity: 0.5;
+    background: #e5e7eb;
+    cursor: not-allowed;
+}
+
     </style>
 
 <!-- Google tag (gtag.js) -->
@@ -986,13 +993,33 @@ fetch(sheetURL)
 
         console.error("Lỗi tải dữ liệu:", error);
     });
-
 /* SỰ KIỆN TÌM KIẾM VÀ LỌC */
 
+// Có từ khóa thì tự động chọn tất cả ngành nghề và khóa ô ngành
+function updateIndustryFilter() {
+    const hasKeyword = searchInput.value.trim() !== "";
+
+    if (hasKeyword) {
+        industryFilter.value = "all";
+    }
+
+    industryFilter.disabled = hasKeyword;
+}
+
+// Cập nhật khi người dùng nhập hoặc xóa từ khóa
+searchInput.addEventListener("input", updateIndustryFilter);
+
+// Tìm kiếm khi bấm nút
 document.getElementById("searchButton").addEventListener("click", applyFilters);
+
+// Tìm kiếm khi nhấn Enter
 searchInput.addEventListener("keydown", function(event) {
     if (event.key === "Enter") applyFilters();
 });
+
+// Khởi tạo trạng thái ban đầu
+updateIndustryFilter();
+
 
 </script>
 
