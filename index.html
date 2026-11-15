@@ -12,7 +12,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0756a5">
+    <meta name="theme-color" content="#087FBD">
     <meta name="description" content="Cổng thông tin việc làm Hải Phòng. Cập nhật việc làm mới nhất, đặc biệt các vị trí kỹ thuật và bảo trì.">
 <!-- Open Graph -->
 <meta property="og:type" content="website">
@@ -101,7 +101,7 @@
         .search-title {
             margin: 0 0 15px;
             font-size: 17px;
-            color: #073f7a;
+            color: #075078;
         }
 
         .filter-row {
@@ -115,7 +115,7 @@
             padding: 0 22px;
             border: 0;
             border-radius: 9px;
-            background: #0756a5;
+            background: #087FBD;
             color: white;
             font-size: 15px;
             font-weight: bold;
@@ -124,7 +124,7 @@
         }
 
         .search-button:hover {
-            background: #1684d8;
+            background: #16A9D8;
         }
 
         .search {
@@ -141,7 +141,7 @@
         }
 
         .search:focus {
-            border-color: #1684d8;
+            border-color: #16A9D8;
             box-shadow: 0 0 0 3px rgba(22,132,216,0.12);
         }
 
@@ -156,10 +156,10 @@
 
         .section-title {
             font-size: 21px;
-            color: #073f7a;
+            color: #075078;
             margin: 0;
             padding-left: 12px;
-            border-left: 4px solid #1684d8;
+            border-left: 4px solid #16A9D8;
         }
 
         .job-count {
@@ -188,7 +188,7 @@
             border-radius: 12px;
             padding: 19px;
             border: 1px solid #e0e9f3;
-            border-left: 4px solid #1684d8;
+            border-left: 4px solid #16A9D8;
             box-shadow: 0 3px 12px rgba(20,60,100,0.05);
             transition: transform 0.2s, box-shadow 0.2s;
         }
@@ -199,7 +199,7 @@
         }
 
         .job h3 {
-            color: #0756a5;
+            color: #087FBD;
             font-size: 17px;
             line-height: 1.45;
             margin: 0 0 14px;
@@ -229,7 +229,7 @@
         }
 
         summary {
-            color: #0756a5;
+            color: #087FBD;
             font-size: 14px;
             font-weight: bold;
             cursor: pointer;
@@ -237,7 +237,7 @@
         }
 
         summary:hover {
-            color: #1684d8;
+            color: #16A9D8;
         }
 
         .detail {
@@ -247,20 +247,28 @@
             overflow-wrap: anywhere;
         }
 
-        .detail a {
-            display: inline-block;
-            color: white;
-            background: #0756a5;
-            padding: 9px 13px;
-            border-radius: 7px;
-            font-weight: bold;
-            text-decoration: none;
-            margin-top: 5px;
-        }
+      /* NÚT CHỨC NĂNG CHUNG */
+.action-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 7px;
+    background: #087FBD;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
 
-        .detail a:hover {
-            background: #1684d8;
-        }
+.action-button:hover {
+    background: #16A9D8;
+    color: #ffffff;
+}
 
         /* FOOTER */
         footer {
@@ -279,11 +287,11 @@
         }
 
         footer strong {
-            color: #0756a5;
+            color: #087FBD;
         }
 
         footer a {
-            color: #0756a5;
+            color: #087FBD;
             text-decoration: none;
         }
 
@@ -475,6 +483,7 @@ const jobCount = document.getElementById("jobCount");
 
 let allJobs = [];
 let duplicateJobIds = new Set();
+let listViewSnapshot = null;
 
 /* CHUYỂN DỮ LIỆU THÀNH CHỮ AN TOÀN */
 function escapeHTML(value) {
@@ -538,25 +547,130 @@ function renderJobDetail(row) {
 
                 ${row[8] ? `
                     <p>
-                        <a href="${escapeHTML(row[8])}"
-                           target="_blank"
-                           rel="noopener noreferrer">
-                           Xem tin tuyển dụng gốc ↗
-                        </a>
+                       <a class="action-button"
+   href="${escapeHTML(row[8])}"
+   target="_blank"
+   rel="noopener noreferrer">
+   Xem tin tuyển dụng gốc ↗
+</a>
                     </p>
                 ` : ""}
             </div>
 
-            <p>
-               <a href="${window.location.pathname}"
-   style="display:inline-block; margin-top:20px; padding:10px 16px; background:#e5e7eb; color:#1f2937; text-decoration:none; border-radius:6px; font-size:16px; font-weight:bold;">
-   ← Quay lại danh sách việc làm
-</a>
-            </p>
+           
+<p>
+    <a href="${window.location.pathname}"
+       class="back-to-jobs action-button">
+       ← Quay lại danh sách việc làm
+    </a>
+</p>
+
 
         </div>
     `;
 }
+
+/* CHUYỂN QUA LẠI GIỮA DANH SÁCH VÀ CHI TIẾT */
+
+jobList.addEventListener("click", function(event) {
+
+    // Khi bấm Xem chi tiết
+    const detailLink = event.target.closest(".job-detail-link");
+
+    if (detailLink) {
+        event.preventDefault();
+
+        const jobId = detailLink.dataset.jobId;
+
+        const matchedJobs = allJobs.filter(row =>
+            String(row[0] || "").trim() === jobId
+        );
+
+        if (matchedJobs.length !== 1 || duplicateJobIds.has(jobId)) {
+            return;
+        }
+
+        // Lưu trạng thái danh sách trước khi mở chi tiết
+        listViewSnapshot = {
+            html: jobList.innerHTML,
+            count: jobCount.textContent,
+            search: searchInput.value,
+            salary: salaryFilter.value,
+            industry: industryFilter.value,
+            industryDisabled: industryFilter.disabled,
+            searchDisplay: document.querySelector(".search-box").style.display,
+            headingDisplay: document.querySelector(".section-heading").style.display,
+            scrollY: window.scrollY
+        };
+
+        // Đổi URL nhưng không tải lại trang
+        history.pushState(
+            { jobId: jobId },
+            "",
+            `${window.location.pathname}?id=${encodeURIComponent(jobId)}`
+        );
+
+        renderJobDetail(matchedJobs[0]);
+        window.scrollTo(0, 0);
+        return;
+    }
+
+    // Khi bấm Quay lại danh sách
+    const backLink = event.target.closest(".back-to-jobs");
+
+    if (backLink) {
+        event.preventDefault();
+
+        if (listViewSnapshot) {
+            history.back();
+        } else {
+            history.replaceState({}, "", window.location.pathname);
+            applyFilters();
+            document.querySelector(".search-box").style.display = "";
+            document.querySelector(".section-heading").style.display = "";
+        }
+    }
+});
+
+// Xử lý nút Back của trình duyệt và điện thoại
+window.addEventListener("popstate", function() {
+
+    const requestedId = new URLSearchParams(window.location.search).get("id");
+
+    if (requestedId) {
+        const matchedJobs = allJobs.filter(row =>
+            String(row[0] || "").trim() === requestedId
+        );
+
+        if (matchedJobs.length === 1 && !duplicateJobIds.has(requestedId)) {
+            renderJobDetail(matchedJobs[0]);
+        }
+
+    } else if (listViewSnapshot) {
+
+        jobList.innerHTML = listViewSnapshot.html;
+        jobCount.textContent = listViewSnapshot.count;
+
+        searchInput.value = listViewSnapshot.search;
+        salaryFilter.value = listViewSnapshot.salary;
+        industryFilter.value = listViewSnapshot.industry;
+        industryFilter.disabled = listViewSnapshot.industryDisabled;
+
+        document.querySelector(".search-box").style.display =
+            listViewSnapshot.searchDisplay;
+
+        document.querySelector(".section-heading").style.display =
+            listViewSnapshot.headingDisplay;
+
+        window.scrollTo(0, listViewSnapshot.scrollY);
+
+    } else {
+
+        applyFilters();
+        document.querySelector(".search-box").style.display = "";
+        document.querySelector(".section-heading").style.display = "";
+    }
+});
 
 
 /* NHẬN DỮ LIỆU VÀ KIỂM TRA MÃ TIN */
@@ -1079,10 +1193,12 @@ ${
 
         return `
             <p>
-                <a href="${window.location.pathname}?id=${encodeURIComponent(jobId)}"
-                   style="display:inline-block; padding:6px 12px; font-size:14px; background:#2563eb; color:white; text-decoration:none; border-radius:6px; font-weight:bold;">
-                    Xem chi tiết ↗
-                </a>
+               <a href="${window.location.pathname}?id=${encodeURIComponent(jobId)}"
+   class="job-detail-link action-button"
+   data-job-id="${escapeHTML(jobId)}"
+   style="display:inline-block; padding:6px 12px; font-size:14px; background:#2563eb; color:white; text-decoration:none; border-radius:6px; font-weight:bold;">
+    Xem chi tiết ↗
+</a>
             </p>
         `;
     })()
