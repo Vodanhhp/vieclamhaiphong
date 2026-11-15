@@ -474,6 +474,7 @@ const industryFilter = document.getElementById("industryFilter");
 const jobCount = document.getElementById("jobCount");
 
 let allJobs = [];
+let duplicateJobIds = new Set();
 
 /* CHUYỂN DỮ LIỆU THÀNH CHỮ AN TOÀN */
 function escapeHTML(value) {
@@ -484,15 +485,142 @@ function escapeHTML(value) {
         '"': "&quot;",
         "'": "&#39;"
     })[char]);
+
 }
 
-/* NHẬN DỮ LIỆU TỪ GOOGLE SHEET */
+/* HIỂN THỊ CHI TIẾT MỘT TIN TUYỂN DỤNG */
+function renderJobDetail(row) {
+
+    const status = String(row[10] || "").toLowerCase();
+
+    let statusHTML = '<span class="status-pending">Chưa xác minh</span>';
+
+    if (status.includes("hết hạn")) {
+        statusHTML = '<span class="status-expired">Đã hết hạn</span>';
+    } else if (status.includes("đã kiểm tra thông tin cơ bản")) {
+        statusHTML = '<span class="status-verified">✓ Đã kiểm tra thông tin</span>';
+    } else if (status.includes("đã xác minh")) {
+        statusHTML = '<span class="status-verified">✓ Đã xác minh</span>';
+    }
+
+    document.querySelector(".search-box").style.display = "none";
+    document.querySelector(".section-heading").style.display = "none";
+
+    jobCount.textContent = "";
+
+    jobList.innerHTML = `
+        <div class="job" style="grid-column: 1 / -1;">
+
+            <h2>${escapeHTML(row[1])}</h2>
+
+            <div class="job-status">${statusHTML}</div>
+
+            <p>🏢 <strong>Công ty:</strong> ${escapeHTML(row[2])}</p>
+
+            <p>📍 <strong>Khu vực:</strong> ${escapeHTML(row[3])}</p>
+
+            <p class="salary">
+                💰 Lương: ${escapeHTML(row[4] || "Chưa cập nhật")}
+            </p>
+
+            <div class="detail">
+                <h3>Mô tả công việc</h3>
+                <p>${escapeHTML(row[5])}</p>
+
+                <h3>Yêu cầu công việc</h3>
+                <p>${escapeHTML(row[6])}</p>
+
+                <p><strong>Hạn nộp:</strong> ${escapeHTML(row[7])}</p>
+
+                <p><strong>Ngày cập nhật:</strong> ${escapeHTML(row[9])}</p>
+
+                <p><strong>Trạng thái:</strong> ${statusHTML}</p>
+
+                ${row[8] ? `
+                    <p>
+                        <a href="${escapeHTML(row[8])}"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                           Xem tin tuyển dụng gốc ↗
+                        </a>
+                    </p>
+                ` : ""}
+            </div>
+
+            <p>
+               <a href="${window.location.pathname}"
+   style="display:inline-block; margin-top:20px; padding:10px 16px; background:#e5e7eb; color:#1f2937; text-decoration:none; border-radius:6px; font-size:16px; font-weight:bold;">
+   ← Quay lại danh sách việc làm
+</a>
+            </p>
+
+        </div>
+    `;
+}
+
+
+/* NHẬN DỮ LIỆU VÀ KIỂM TRA MÃ TIN */
 function displayJobs(rows) {
-    allJobs = rows.slice(1).filter(row =>
+
+    const jobRows = rows.slice(1).filter(row =>
         row[1] && String(row[10] || "").trim() !== "Đã tuyển"
     );
 
+    const idCounts = new Map();
+
+    jobRows.forEach(row => {
+        const id = String(row[0] || "").trim();
+
+        if (id) {
+            idCounts.set(id, (idCounts.get(id) || 0) + 1);
+        }
+    });
+
+    duplicateJobIds = new Set(
+        [...idCounts.entries()]
+            .filter(([id, count]) => count > 1)
+            .map(([id]) => id)
+    );
+
+    allJobs = jobRows;
+
+    console.log("Số mã tin bị trùng:", duplicateJobIds.size);
+    console.log("Danh sách mã trùng:", [...duplicateJobIds]);
+
+    
+const requestedId = new URLSearchParams(window.location.search).get("id");
+
+if (requestedId) {
+
+    const matchedJobs = allJobs.filter(row =>
+        String(row[0] || "").trim() === requestedId.trim()
+    );
+
+    if (matchedJobs.length === 1 && !duplicateJobIds.has(requestedId.trim())) {
+
+        renderJobDetail(matchedJobs[0]);
+
+    } else {
+
+        jobCount.textContent = "";
+
+        jobList.innerHTML = `
+            <div class="job">
+                <h3>Không tìm thấy tin tuyển dụng</h3>
+                <p>Tin có thể đã bị gỡ hoặc mã tin không hợp lệ.</p>
+                <a href="${window.location.pathname}">
+                    ← Quay lại danh sách việc làm
+                </a>
+            </div>
+        `;
+    }
+
+} else {
+
     applyFilters();
+
+}
+
 }
 const categoryKeywords = {
     accounting: [
@@ -936,39 +1064,30 @@ function renderJobs(jobs) {
                 💰 Lương: ${escapeHTML(row[4] || "Chưa cập nhật")}
             </p>
 
-            <details>
-                <summary>Xem chi tiết công việc ▼</summary>
+           
+${
+    (() => {
+        const jobId = String(row[0] || "").trim();
 
-                <div class="detail">
+        if (!jobId) {
+            return '<p>Chưa có mã tin để xem chi tiết.</p>';
+        }
 
-                    <p>${escapeHTML(row[5])}</p>
+        if (duplicateJobIds.has(jobId)) {
+            return '<p>Không thể mở chi tiết: mã tin bị trùng.</p>';
+        }
 
-                    <p><strong>Yêu cầu:</strong> ${escapeHTML(row[6])}</p>
+        return `
+            <p>
+                <a href="${window.location.pathname}?id=${encodeURIComponent(jobId)}"
+                   style="display:inline-block; padding:6px 12px; font-size:14px; background:#2563eb; color:white; text-decoration:none; border-radius:6px; font-weight:bold;">
+                    Xem chi tiết ↗
+                </a>
+            </p>
+        `;
+    })()
+}
 
-                    <p><strong>Hạn nộp:</strong> ${escapeHTML(row[7])}</p>
-
-                    <p><strong>Ngày cập nhật:</strong> ${escapeHTML(row[9])}</p>
-
-                    <p><strong>Trạng thái:</strong>
-    ${
-        String(row[10] || "").toLowerCase().includes("hết hạn")
-            ? '<span class="status-expired">Đã hết hạn</span>'
-            : String(row[10] || "").toLowerCase().includes("đã kiểm tra thông tin cơ bản")
-                ? '<span class="status-verified">✓ Đã kiểm tra thông tin</span>'
-                : String(row[10] || "").toLowerCase().includes("đã xác minh")
-                    ? '<span class="status-verified">✓ Đã xác minh</span>'
-                    : '<span class="status-pending">Chưa xác minh</span>'
-    }
-</p>
-  
-
-                    ${row[8]
-                        ? `<p><a href="${escapeHTML(row[8])}" target="_blank" rel="noopener noreferrer">Xem tin tuyển dụng gốc ↗</a></p>`
-                        : ""
-                    }
-
-                </div>
-            </details>
 
         </div>
     `).join("");
