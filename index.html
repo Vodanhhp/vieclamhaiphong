@@ -724,6 +724,7 @@ function displayJobs(rows, onlyLoad = false) {
     );
 
     allJobs = jobRows;
+    if (onlyLoad) return;
 
     console.log("Số mã tin bị trùng:", duplicateJobIds.size);
     console.log("Danh sách mã trùng:", [...duplicateJobIds]);
@@ -1269,10 +1270,12 @@ function loadAllJobs() {
             }
             return response.json();
         })
-        .then(data => {
-            displayJobs(data, true);
-            allDataLoaded = true;
-        })
+       .then(data => {
+    console.log("Tổng số dòng API trả về:", data.length);
+    displayJobs(data, true);
+    console.log("Số tin trong allJobs sau khi nạp:", allJobs.length);
+    allDataLoaded = true;
+})
         .catch(error => {
             loadingAllData = null;
             console.error("Lỗi tải toàn bộ dữ liệu:", error);
