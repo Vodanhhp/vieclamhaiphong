@@ -19,7 +19,7 @@
 <meta property="og:url" content="https://vieclamhp247.com/">
 <meta property="og:title" content="Việc làm Hải Phòng 247 – Tìm việc và Tuyển dụng tại Hải Phòng">
 <meta property="og:description" content="Cổng thông tin việc làm Hải Phòng. Tra cứu việc làm mới nhất, từ kỹ thuật, bảo trì đến sản xuất, văn phòng và nhiều ngành nghề khác.">
-<meta property="og:image" content="https://vieclamhp247.com/banner-haiphong.png">
+<meta property="og:image" content="https://vieclamhp247.com/banner-haiphong.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="vi_VN">
@@ -42,7 +42,7 @@
         header {
             background:
                 linear-gradient(120deg, rgba(3, 45, 91, 0.58), rgba(7, 86, 165, 0.38)),
-                url("banner-haiphong.png") center center / cover no-repeat;
+                url("banner-haiphong.jpg") center center / cover no-repeat;
             color: white;
             padding: 42px 20px;
             position: relative;
@@ -701,7 +701,7 @@ window.addEventListener("popstate", function() {
 
 
 /* NHẬN DỮ LIỆU VÀ KIỂM TRA MÃ TIN */
-function displayJobs(rows) {
+function displayJobs(rows, onlyLoad = false) {
 
     const jobRows = rows.slice(1).filter(row =>
         row[1] && String(row[10] || "").trim() !== "Đã tuyển"
@@ -727,7 +727,8 @@ function displayJobs(rows) {
 
     console.log("Số mã tin bị trùng:", duplicateJobIds.size);
     console.log("Danh sách mã trùng:", [...duplicateJobIds]);
-
+// Chỉ nạp dữ liệu, chưa hiển thị
+if (onlyLoad) return;
     
 const requestedId = new URLSearchParams(window.location.search).get("id");
 
@@ -1019,7 +1020,16 @@ console.log("Danh sách từ khóa tìm kiếm:", searchTerms);
 
 console.log("Ngành đang chọn:", industry);
 
-const jobs = allJobs.filter(row => {
+const hasActiveFilters =
+    keyword !== "" ||
+    salary !== "all" ||
+    industry !== "all";
+
+const sourceJobs = hasActiveFilters
+    ? allJobs
+    : allJobs.slice(0, 10);
+
+const jobs = sourceJobs.filter(row => {
 
         const text = row.join(" ").toLowerCase();
         const titleText = String(row[1] || "").toLowerCase();
@@ -1236,7 +1246,45 @@ ${
 }
 
 /* TẢI DỮ LIỆU */
-fetch(sheetURL)
+
+/* TẢI DỮ LIỆU */
+const requestedId = new URLSearchParams(window.location.search).get("id");
+
+let allDataLoaded = false;
+let loadingAllData = null;
+
+function loadAllJobs() {
+    if (allDataLoaded) {
+        return Promise.resolve();
+    }
+
+    if (loadingAllData) {
+        return loadingAllData;
+    }
+
+    loadingAllData = fetch(sheetURL + "?mode=all")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Không tải được toàn bộ dữ liệu");
+            }
+            return response.json();
+        })
+        .then(data => {
+            displayJobs(data, true);
+            allDataLoaded = true;
+        })
+        .catch(error => {
+            loadingAllData = null;
+            console.error("Lỗi tải toàn bộ dữ liệu:", error);
+            throw error;
+        });
+
+    return loadingAllData;
+}
+
+// Mở trang chủ: chỉ lấy 10 tin.
+// Mở đường dẫn chi tiết: lấy toàn bộ để tìm đúng mã tin.
+fetch(requestedId ? sheetURL + "?mode=all" : sheetURL)
     .then(response => {
         if (!response.ok) {
             throw new Error("Không tải được dữ liệu");
@@ -1245,15 +1293,19 @@ fetch(sheetURL)
     })
     .then(data => {
         displayJobs(data);
+
+        if (requestedId) {
+            allDataLoaded = true;
+        }
     })
     .catch(error => {
         jobList.innerHTML =
             "<p>Chưa kết nối được dữ liệu. Vui lòng thử lại sau.</p>";
 
         jobCount.textContent = "";
-
         console.error("Lỗi tải dữ liệu:", error);
     });
+
 /* SỰ KIỆN TÌM KIẾM VÀ LỌC */
 
 // Có từ khóa thì tự động chọn tất cả ngành nghề và khóa ô ngành
@@ -1271,15 +1323,50 @@ function updateIndustryFilter() {
 searchInput.addEventListener("input", updateIndustryFilter);
 
 // Tìm kiếm khi bấm nút
-document.getElementById("searchButton").addEventListener("click", applyFilters);
+
+// Cập nhật khi người dùng nhập hoặc xóa từ khóa
+searchInput.addEventListener("input", updateIndustryFilter);
+
+// Tìm kiếm khi bấm nút
+document.getElementById("searchButton").addEventListener("click", function() {
+    loadAllJobs()
+        .then(applyFilters)
+        .catch(() => {
+            jobList.innerHTML =
+                "<p>Không tải được dữ liệu tìm kiếm. Vui lòng thử lại.</p>";
+        });
+});
 
 // Tìm kiếm khi nhấn Enter
 searchInput.addEventListener("keydown", function(event) {
-    if (event.key === "Enter") applyFilters();
+    if (event.key === "Enter") {
+        document.getElementById("searchButton").click();
+    }
+});
+
+// Chọn ngành nghề
+industryFilter.addEventListener("change", function() {
+    loadAllJobs()
+        .then(applyFilters)
+        .catch(() => {
+            jobList.innerHTML =
+                "<p>Không tải được dữ liệu. Vui lòng thử lại.</p>";
+        });
+});
+
+// Chọn mức lương
+salaryFilter.addEventListener("change", function() {
+    loadAllJobs()
+        .then(applyFilters)
+        .catch(() => {
+            jobList.innerHTML =
+                "<p>Không tải được dữ liệu. Vui lòng thử lại.</p>";
+        });
 });
 
 // Khởi tạo trạng thái ban đầu
 updateIndustryFilter();
+
 
 
 </script>
