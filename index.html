@@ -114,12 +114,12 @@
 
             .filter-row {
                 display: grid;
-                grid-template-columns: minmax(0, 1fr) 250px auto;
+                grid-template-columns: minmax(0, 1fr) 220px 220px auto;
                 gap: 12px;
                 align-items: stretch;
             }
 
-            .search-button {
+            .filter-hint { grid-column: 1 / -1; margin: 9px 0 0; color: #718096; font-size: 12px; }            .search-button {
                 padding: 0 22px;
                 border: 0;
                 border-radius: 9px;
@@ -231,7 +231,7 @@
                 display: inline-block;
             }
 
-            /* Nội dung chi tiết của từng tin tuyển dụng */
+            .job .job-date { margin: 4px 0 10px; color: #718096; font-size: 12px; } /* Nội dung chi tiết của từng tin tuyển dụng */
             details {
                 margin-top: 13px;
                 border-top: 1px solid #e8eef5;
@@ -343,7 +343,7 @@
             }
 
             /* Điều chỉnh bố cục cho màn hình điện thoại */
-            @media (max-width: 650px) {
+            @media (max-width: 900px) { .filter-row { grid-template-columns: repeat(2, minmax(0, 1fr)); } } @media (max-width: 650px) {
                 header {
                     padding: 32px 18px;
                 }
@@ -370,7 +370,7 @@
                     grid-template-columns: 1fr;
                 }
 
-                .search-button {
+                .filter-hint { grid-column: 1 / -1; margin: 9px 0 0; color: #718096; font-size: 12px; }            .search-button {
                     min-height: 46px;
                 }
 
@@ -492,7 +492,7 @@
                         <option value="unknown">Không ghi mức lương</option>
                     </select>
 
-                    <button id="searchButton" class="search-button" type="button">Tìm kiếm</button>
+                    <button id="searchButton" class="search-button" type="button">Tìm kiếm</button> <p id="industryFilterHint" class="filter-hint" aria-live="polite" hidden>Khi nhập từ khóa, ngành nghề tự chuyển về “Tất cả ngành nghề” và tạm khóa.</p>
                 </div>
             </section>
 
@@ -524,7 +524,7 @@
             const jobList = document.getElementById("jobList");
             const searchInput = document.getElementById("keywordSearch");
             const salaryFilter = document.getElementById("salaryFilter");
-            const industryFilter = document.getElementById("industryFilter");
+            const industryFilter = document.getElementById("industryFilter"); const industryFilterHint = document.getElementById("industryFilterHint");
             const jobCount = document.getElementById("jobCount");
 
             // Dữ liệu việc làm, mã tin trùng và trạng thái danh sách trước khi mở chi tiết
@@ -1352,7 +1352,7 @@
             </p>
 
            
-${(() => {
+${row[7] || row[9] ? `<p class="job-date">📅 ${row[7] ? "Hạn nộp" : "Cập nhật"}: ${escapeHTML(row[7] || row[9])}</p>` : ""} ${(() => {
     const jobId = String(row[0] || "").trim();
 
     if (!jobId) {
@@ -1451,7 +1451,7 @@ ${(() => {
                     industryFilter.value = "all";
                 }
 
-                industryFilter.disabled = hasKeyword;
+                industryFilter.disabled = hasKeyword; industryFilterHint.hidden = !hasKeyword;
             }
 
             // Cập nhật khi người dùng nhập hoặc xóa từ khóa
