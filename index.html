@@ -1,550 +1,572 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
+    <head>
+        <!-- Biểu tượng, thông tin hiển thị trên trình duyệt và nội dung chia sẻ trang -->
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
 
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="#087FBD" />
+        <meta
+            name="description"
+            content="Cổng thông tin việc làm Hải Phòng. Cập nhật việc làm mới nhất, đặc biệt các vị trí kỹ thuật và bảo trì."
+        />
+        <!-- Open Graph -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://vieclamhp247.com/" />
+        <meta
+            property="og:title"
+            content="Việc làm Hải Phòng 247 – Tìm việc và Tuyển dụng tại Hải Phòng"
+        />
+        <meta
+            property="og:description"
+            content="Cổng thông tin việc làm Hải Phòng. Tra cứu việc làm mới nhất, từ kỹ thuật, bảo trì đến sản xuất, văn phòng và nhiều ngành nghề khác."
+        />
+        <meta property="og:image" content="https://vieclamhp247.com/banner-haiphong.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:locale" content="vi_VN" />
+        <meta property="og:site_name" content="Việc làm Hải Phòng" />
+        <title>Việc làm Hải Phòng 247 – Tìm việc và Tuyển dụng tại Hải Phòng</title>
 
+        <!-- Kiểu giao diện của trang: bố cục, danh sách việc làm và hiển thị trên điện thoại -->
+        <style>
+            /* Thiết lập kiểu hiển thị cơ bản cho toàn trang */
+            * {
+                box-sizing: border-box;
+            }
 
+            body {
+                margin: 0;
+                font-family: Arial, Helvetica, sans-serif;
+                background: #f1f5fa;
+                color: #263445;
+            }
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#087FBD">
-    <meta name="description" content="Cổng thông tin việc làm Hải Phòng. Cập nhật việc làm mới nhất, đặc biệt các vị trí kỹ thuật và bảo trì.">
-<!-- Open Graph -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://vieclamhp247.com/">
-<meta property="og:title" content="Việc làm Hải Phòng 247 – Tìm việc và Tuyển dụng tại Hải Phòng">
-<meta property="og:description" content="Cổng thông tin việc làm Hải Phòng. Tra cứu việc làm mới nhất, từ kỹ thuật, bảo trì đến sản xuất, văn phòng và nhiều ngành nghề khác.">
-<meta property="og:image" content="https://vieclamhp247.com/banner-haiphong.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:locale" content="vi_VN">
-<meta property="og:site_name" content="Việc làm Hải Phòng">
-    <title>Việc làm Hải Phòng 247 – Tìm việc và Tuyển dụng tại Hải Phòng</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f1f5fa;
-            color: #263445;
-        }
-
-        /* HEADER */
-        header {
-            background:
-                linear-gradient(120deg, rgba(3, 45, 91, 0.58), rgba(7, 86, 165, 0.38)),
-                url("banner-haiphong.jpg") center center / cover no-repeat;
-            color: white;
-            padding: 42px 20px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 45, 100, 0.18);
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 30px;
-            letter-spacing: 1px;
-            text-align: center;
-            text-shadow: 0 2px 5px rgba(0, 25, 60, 0.35);
-        }
-
-        header p {
-            margin: 12px 0 0;
-            font-size: 15px;
-            color: #f0f7ff;
-            text-shadow: 0 1px 4px rgba(0, 25, 60, 0.35);
-        }
-
-        .header-tag {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 7px 13px;
-            border: 1px solid rgba(255,255,255,0.55);
-            border-radius: 30px;
-            font-size: 12px;
-            color: #ffffff;
-            background: rgba(0, 55, 110, 0.18);
-        }
-
-        /* MAIN */
-        main {
-            max-width: 1050px;
-            margin: 30px auto;
-            padding: 0 18px;
-        }
-
-        /* SEARCH BOX */
-        .search-box {
-            background: white;
-            padding: 22px;
-            border-radius: 14px;
-            box-shadow: 0 4px 16px rgba(20,60,100,0.06);
-            border: 1px solid #e3ebf4;
-        }
-
-        .search-title {
-            margin: 0 0 15px;
-            font-size: 17px;
-            color: #075078;
-        }
-
-        .filter-row {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) 250px auto;
-            gap: 12px;
-            align-items: stretch;
-        }
-
-        .search-button {
-            padding: 0 22px;
-            border: 0;
-            border-radius: 9px;
-            background: #087FBD;
-            color: white;
-            font-size: 15px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .search-button:hover {
-            background: #16A9D8;
-        }
-
-        .search {
-            width: 100%;
-            min-width: 0;
-            padding: 14px 15px;
-            border: 1px solid #d4e0ee;
-            border-radius: 9px;
-            font-size: 15px;
-            background: #fff;
-            color: #263445;
-            outline: none;
-            transition: 0.2s;
-        }
-
-        .search:focus {
-            border-color: #16A9D8;
-            box-shadow: 0 0 0 3px rgba(22,132,216,0.12);
-        }
-
-        /* JOB SECTION */
-        .section-heading {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 10px;
-            margin: 28px 0 16px;
-        }
-
-        .section-title {
-            font-size: 21px;
-            color: #075078;
-            margin: 0;
-            padding-left: 12px;
-            border-left: 4px solid #16A9D8;
-        }
-
-        .job-count {
-            font-size: 13px;
-            color: #718096;
-        }
-
-        /* JOB LIST */
-        #jobList {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 16px;
-        }
-
-        #jobList > p {
-            grid-column: 1 / -1;
-            background: white;
-            padding: 22px;
-            border-radius: 10px;
-            color: #66788a;
-            text-align: center;
-        }
-
-        .job {
-            background: white;
-            border-radius: 12px;
-            padding: 19px;
-            border: 1px solid #e0e9f3;
-            border-left: 4px solid #16A9D8;
-            box-shadow: 0 3px 12px rgba(20,60,100,0.05);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .job:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 7px 18px rgba(20,60,100,0.11);
-        }
-
-        .job h3 {
-            color: #087FBD;
-            font-size: 17px;
-            line-height: 1.45;
-            margin: 0 0 14px;
-        }
-
-        .job p {
-            font-size: 14px;
-            margin: 8px 0;
-            line-height: 1.55;
-            overflow-wrap: anywhere;
-        }
-
-        .salary {
-            color: #13834d;
-            font-weight: bold;
-            background: #eaf8f0;
-            padding: 8px 10px;
-            border-radius: 7px;
-            display: inline-block;
-        }
-
-        /* DETAILS */
-        details {
-            margin-top: 13px;
-            border-top: 1px solid #e8eef5;
-            padding-top: 10px;
-        }
-
-        summary {
-            color: #087FBD;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            padding: 6px 0;
-        }
-
-        summary:hover {
-            color: #16A9D8;
-        }
-
-        .detail {
-            font-size: 14px;
-            line-height: 1.7;
-            padding-top: 8px;
-            overflow-wrap: anywhere;
-        }
-
-      /* NÚT CHỨC NĂNG CHUNG */
-.action-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    height: 40px;
-    padding: 0 12px;
-    border: none;
-    border-radius: 7px;
-    background: #087FBD;
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 13px;
-    font-weight: bold;
-    line-height: 1;
-    text-decoration: none;
-    cursor: pointer;
-    vertical-align: middle;
-
-    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
-    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-}
-
-.action-button:hover {
-    background: #16A9D8;
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.22);
-}
-
-.action-button:active {
-    transform: translateY(1px);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.18);
-}
-.feedback-button {
-    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-}
-
-.feedback-button:hover {
-    background: #16A9D8 !important;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.22);
-}
-
-.feedback-button:active {
-    transform: translateY(1px);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.18);
-}
-
-        /* FOOTER */
-        footer {
-            margin-top: 50px;
-            padding: 28px 15px;
-            text-align: center;
-            color: #73849a;
-            background: #e6eef7;
-            border-top: 1px solid #d6e3f0;
-            font-size: 13px;
-            line-height: 1.8;
-        }
-
-        footer p {
-            margin: 4px 0;
-        }
-
-        footer strong {
-            color: #087FBD;
-        }
-
-        footer a {
-            color: #087FBD;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* MOBILE */
-        @media (max-width: 650px) {
+            /* Khu vực tiêu đề và hình ảnh đầu trang */
             header {
-                padding: 32px 18px;
+                background:
+                    linear-gradient(120deg, rgba(3, 45, 91, 0.58), rgba(7, 86, 165, 0.38)),
+                    url("banner-haiphong.jpg") center center / cover no-repeat;
+                color: white;
+                padding: 42px 20px;
+                position: relative;
+                overflow: hidden;
+                box-shadow: 0 4px 15px rgba(0, 45, 100, 0.18);
+            }
+
+            .header-content {
+                position: relative;
+                z-index: 1;
+                text-align: center;
             }
 
             header h1 {
-                font-size: 24px;
+                margin: 0;
+                font-size: 30px;
+                letter-spacing: 1px;
+                text-align: center;
+                text-shadow: 0 2px 5px rgba(0, 25, 60, 0.35);
             }
 
             header p {
-                font-size: 14px;
-                line-height: 1.5;
+                margin: 12px 0 0;
+                font-size: 15px;
+                color: #f0f7ff;
+                text-shadow: 0 1px 4px rgba(0, 25, 60, 0.35);
             }
 
+            .header-tag {
+                display: inline-block;
+                margin-top: 20px;
+                padding: 7px 13px;
+                border: 1px solid rgba(255, 255, 255, 0.55);
+                border-radius: 30px;
+                font-size: 12px;
+                color: #ffffff;
+                background: rgba(0, 55, 110, 0.18);
+            }
+
+            /* Khung nội dung chính của trang */
             main {
-                margin: 20px auto;
-                padding: 0 13px;
+                max-width: 1050px;
+                margin: 30px auto;
+                padding: 0 18px;
             }
 
+            /* Ô tìm kiếm và các bộ lọc */
             .search-box {
-                padding: 17px;
+                background: white;
+                padding: 22px;
+                border-radius: 14px;
+                box-shadow: 0 4px 16px rgba(20, 60, 100, 0.06);
+                border: 1px solid #e3ebf4;
+            }
+
+            .search-title {
+                margin: 0 0 15px;
+                font-size: 17px;
+                color: #075078;
             }
 
             .filter-row {
-                grid-template-columns: 1fr;
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) 250px auto;
+                gap: 12px;
+                align-items: stretch;
             }
 
             .search-button {
-                min-height: 46px;
+                padding: 0 22px;
+                border: 0;
+                border-radius: 9px;
+                background: #087fbd;
+                color: white;
+                font-size: 15px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: background 0.2s;
             }
 
-            #jobList {
-                grid-template-columns: 1fr;
-                gap: 12px;
+            .search-button:hover {
+                background: #16a9d8;
+            }
+
+            .search {
+                width: 100%;
+                min-width: 0;
+                padding: 14px 15px;
+                border: 1px solid #d4e0ee;
+                border-radius: 9px;
+                font-size: 15px;
+                background: #fff;
+                color: #263445;
+                outline: none;
+                transition: 0.2s;
+            }
+
+            .search:focus {
+                border-color: #16a9d8;
+                box-shadow: 0 0 0 3px rgba(22, 132, 216, 0.12);
+            }
+
+            /* Tiêu đề danh sách và số lượng kết quả */
+            .section-heading {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 10px;
+                margin: 28px 0 16px;
             }
 
             .section-title {
-                font-size: 19px;
+                font-size: 21px;
+                color: #075078;
+                margin: 0;
+                padding-left: 12px;
+                border-left: 4px solid #16a9d8;
+            }
+
+            .job-count {
+                font-size: 13px;
+                color: #718096;
+            }
+
+            /* Lưới hiển thị các tin tuyển dụng */
+            #jobList {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 16px;
+            }
+
+            #jobList > p {
+                grid-column: 1 / -1;
+                background: white;
+                padding: 22px;
+                border-radius: 10px;
+                color: #66788a;
+                text-align: center;
             }
 
             .job {
-                padding: 16px;
+                background: white;
+                border-radius: 12px;
+                padding: 19px;
+                border: 1px solid #e0e9f3;
+                border-left: 4px solid #16a9d8;
+                box-shadow: 0 3px 12px rgba(20, 60, 100, 0.05);
+                transition:
+                    transform 0.2s,
+                    box-shadow 0.2s;
             }
 
-            .section-heading {
-                margin-top: 23px;
+            .job:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 7px 18px rgba(20, 60, 100, 0.11);
             }
-        }
-        .status-verified {
-    color: #15803d;
-    background: #dcfce7;
-    padding: 3px 9px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 600;
-}
 
-.status-pending {
-    color: #92400e;
-    background: #fef3c7;
-    padding: 3px 9px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 600;
-}
+            .job h3 {
+                color: #087fbd;
+                font-size: 17px;
+                line-height: 1.45;
+                margin: 0 0 14px;
+            }
 
-.status-expired {
-    color: #991b1b;
-    background: #fee2e2;
-    padding: 3px 9px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 600;
-}
+            .job p {
+                font-size: 14px;
+                margin: 8px 0;
+                line-height: 1.55;
+                overflow-wrap: anywhere;
+            }
 
-#industryFilter:disabled {
-    opacity: 0.5;
-    background: #e5e7eb;
-    cursor: not-allowed;
-}
+            .salary {
+                color: #13834d;
+                font-weight: bold;
+                background: #eaf8f0;
+                padding: 8px 10px;
+                border-radius: 7px;
+                display: inline-block;
+            }
 
-    </style>
+            /* Nội dung chi tiết của từng tin tuyển dụng */
+            details {
+                margin-top: 13px;
+                border-top: 1px solid #e8eef5;
+                padding-top: 10px;
+            }
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-23HE4MQ3N9"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-23HE4MQ3N9');
-</script>
+            summary {
+                color: #087fbd;
+                font-size: 14px;
+                font-weight: bold;
+                cursor: pointer;
+                padding: 6px 0;
+            }
 
+            summary:hover {
+                color: #16a9d8;
+            }
 
+            .detail {
+                font-size: 14px;
+                line-height: 1.7;
+                padding-top: 8px;
+                overflow-wrap: anywhere;
+            }
 
+            /* NÚT CHỨC NĂNG CHUNG */
+            .action-button {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                box-sizing: border-box;
+                height: 36px;
+                padding: 0 10px;
+                border: none;
+                border-radius: 7px;
+                background: #087fbd;
+                color: white;
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 12px;
+                font-weight: bold;
+                line-height: 1;
+                text-decoration: none;
+                cursor: pointer;
+                vertical-align: middle;
 
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+                transition:
+                    background 0.2s,
+                    transform 0.2s,
+                    box-shadow 0.2s;
+            }
+
+            .action-button:hover {
+                background: #16a9d8;
+                color: white;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.22);
+            }
+
+            .action-button:active {
+                transform: translateY(1px);
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+            }
+            .feedback-button {
+                transition:
+                    background 0.2s,
+                    transform 0.2s,
+                    box-shadow 0.2s;
+            }
+
+            .feedback-button:hover {
+                background: #16a9d8 !important;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.22);
+            }
+
+            .feedback-button:active {
+                transform: translateY(1px);
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+            }
+
+            /* Chân trang và thông tin liên hệ */
+            footer {
+                margin-top: 50px;
+                padding: 28px 15px;
+                text-align: center;
+                color: #73849a;
+                background: #e6eef7;
+                border-top: 1px solid #d6e3f0;
+                font-size: 13px;
+                line-height: 1.8;
+            }
+
+            footer p {
+                margin: 4px 0;
+            }
+
+            footer strong {
+                color: #087fbd;
+            }
+
+            footer a {
+                color: #087fbd;
+                text-decoration: none;
+            }
+
+            footer a:hover {
+                text-decoration: underline;
+            }
+
+            /* Điều chỉnh bố cục cho màn hình điện thoại */
+            @media (max-width: 650px) {
+                header {
+                    padding: 32px 18px;
+                }
+
+                header h1 {
+                    font-size: 24px;
+                }
+
+                header p {
+                    font-size: 14px;
+                    line-height: 1.5;
+                }
+
+                main {
+                    margin: 20px auto;
+                    padding: 0 13px;
+                }
+
+                .search-box {
+                    padding: 17px;
+                }
+
+                .filter-row {
+                    grid-template-columns: 1fr;
+                }
+
+                .search-button {
+                    min-height: 46px;
+                }
+
+                .action-button {
+                    height: 40px;
+                }
+
+                #jobList {
+                    grid-template-columns: 1fr;
+                    gap: 12px;
+                }
+
+                .section-title {
+                    font-size: 19px;
+                }
+
+                .job {
+                    padding: 16px;
+                }
+
+                .section-heading {
+                    margin-top: 23px;
+                }
+            }
+            /* Màu sắc nhãn trạng thái xác minh tin tuyển dụng */
+            .status-verified {
+                color: #15803d;
+                background: #dcfce7;
+                padding: 3px 9px;
+                border-radius: 12px;
+                font-size: 12px;
+                font-weight: 600;
+            }
+
+            .status-pending {
+                color: #92400e;
+                background: #fef3c7;
+                padding: 3px 9px;
+                border-radius: 12px;
+                font-size: 12px;
+                font-weight: 600;
+            }
+
+            .status-expired {
+                color: #991b1b;
+                background: #fee2e2;
+                padding: 3px 9px;
+                border-radius: 12px;
+                font-size: 12px;
+                font-weight: 600;
+            }
+
+            #industryFilter:disabled {
+                opacity: 0.5;
+                background: #e5e7eb;
+                cursor: not-allowed;
+            }
+        </style>
+
+        <!-- Đo lường lượt truy cập bằng Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-23HE4MQ3N9"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+            gtag("config", "G-23HE4MQ3N9");
+        </script>
     </head>
 
-<body>
+    <body>
+        <!-- Tiêu đề và thông điệp chính của website -->
+        <header>
+            <div class="header-content">
+                <h1>VIỆC LÀM HẢI PHÒNG</h1>
+                <p>Cập nhật cơ hội việc làm mới nhất tại Hải Phòng</p>
+                <span class="header-tag">Kết nối cơ hội - Phát triển nghề nghiệp</span>
+            </div>
+        </header>
 
-<header>
-    <div class="header-content">
-        <h1>VIỆC LÀM HẢI PHÒNG</h1>
-        <p>Cập nhật cơ hội việc làm mới nhất tại Hải Phòng</p>
-        <span class="header-tag">Kết nối cơ hội - Phát triển nghề nghiệp</span>
-    </div>
-</header>
+        <main>
+            <!-- Khu vực nhập từ khóa, chọn ngành nghề và chọn mức lương -->
+            <section class="search-box">
+                <h2 class="search-title">Tìm kiếm việc làm</h2>
 
-<main>
+                <div class="filter-row">
+                    <input
+                        class="search"
+                        id="keywordSearch"
+                        type="search"
+                        placeholder="Nhập địa điểm, công việc cụ thể..."
+                    />
+                    <select id="industryFilter" class="search">
+                        <option value="all">Tất cả ngành nghề</option>
+                        <option value="accounting">Kế toán – Tài chính</option>
+                        <option value="business">Kinh doanh – Thương mại</option>
+                        <option value="hr">Nhân sự – Hành chính</option>
+                        <option value="education">Giáo dục – Đào tạo</option>
+                        <option value="office">Quản trị – Văn phòng</option>
+                        <option value="logistics">Logistics – Xuất nhập khẩu</option>
+                        <option value="technical">Kỹ thuật – Sản xuất</option>
+                        <option value="quality">QA/QC – Quản lý chất lượng</option>
+                        <option value="environment">Môi trường – Xử lý chất thải</option>
+                        <option value="service">Dịch vụ – Bán hàng</option>
+                        <option value="security">Bảo vệ – An ninh</option>
+                        <option value="it">Công nghệ thông tin (IT)</option>
+                        <option value="driver">Tài xế – Lái xe</option>
+                        <option value="labor">Lao động phổ thông</option>
+                    </select>
+                    <select id="salaryFilter" class="search">
+                        <option value="all">Tất cả mức lương</option>
+                        <option value="under7">Dưới 7 triệu</option>
+                        <option value="7-10">7 - 10 triệu</option>
+                        <option value="10-15">10 - 15 triệu</option>
+                        <option value="15-20">15 - 20 triệu</option>
+                        <option value="over20">Trên 20 triệu</option>
+                        <option value="negotiable">Thỏa thuận</option>
+                        <option value="unknown">Không ghi mức lương</option>
+                    </select>
 
-    <section class="search-box">
-        <h2 class="search-title">Tìm kiếm việc làm</h2>
+                    <button id="searchButton" class="search-button" type="button">Tìm kiếm</button>
+                </div>
+            </section>
 
-        <div class="filter-row">
-            <input
-                class="search"
-                id="keywordSearch"
-                type="search"
-              placeholder="Nhập địa điểm, công việc cụ thể..."
-            >
-<select id="industryFilter" class="search">
-    <option value="all">Tất cả ngành nghề</option>
-    <option value="accounting">Kế toán – Tài chính</option>
-    <option value="business">Kinh doanh – Thương mại</option>
-    <option value="hr">Nhân sự – Hành chính</option>
-    <option value="office">Quản trị – Văn phòng</option>
-    <option value="logistics">Logistics – Xuất nhập khẩu</option>
-    <option value="technical">Kỹ thuật – Sản xuất</option>
-    <option value="environment">Môi trường – Xử lý chất thải</option>
-    <option value="service">Dịch vụ – Bán hàng</option>
-    <option value="security">Bảo vệ – An ninh</option>
-<option value="it">Công nghệ thông tin (IT)</option>
-<option value="driver">Tài xế – Lái xe</option>
-<option value="labor">Lao động phổ thông</option>
-</select>
-            <select id="salaryFilter" class="search">
-                <option value="all">Tất cả mức lương</option>
-                <option value="under7">Dưới 7 triệu</option>
-                <option value="7-10">7 - 10 triệu</option>
-                <option value="10-15">10 - 15 triệu</option>
-                <option value="15-20">15 - 20 triệu</option>
-                <option value="over20">Trên 20 triệu</option>
-                <option value="negotiable">Thỏa thuận</option>
-                <option value="unknown">Không ghi mức lương</option>
-            </select>
+            <!-- Tiêu đề kết quả và vùng hiển thị danh sách việc làm -->
+            <div class="section-heading">
+                <h2 class="section-title">Việc làm mới nhất</h2>
+                <span id="jobCount" class="job-count"></span>
+            </div>
 
-            <button id="searchButton" class="search-button" type="button">
-                Tìm kiếm
-            </button>
-        </div>
-    </section>
+            <div id="jobList">
+                <p>Đang tải danh sách việc làm...</p>
+            </div>
+        </main>
 
-    <div class="section-heading">
-        <h2 class="section-title">Việc làm mới nhất</h2>
-        <span id="jobCount" class="job-count"></span>
-    </div>
+        <!-- Thông tin bản quyền và địa chỉ liên hệ -->
+        <footer>
+            <p>© 2026 VIỆC LÀM HẢI PHÒNG</p>
+            <p>Developed by <strong>Luong Fix</strong></p>
+            <p>✉ <a href="mailto:tuanluongpham@gmail.com"> tuanluongpham@gmail.com</a></p>
+        </footer>
 
-    <div id="jobList">
-        <p>Đang tải danh sách việc làm...</p>
-    </div>
+        <!-- Các hàm tải dữ liệu, lọc việc làm và điều khiển giao diện -->
+        <script>
+            // Địa chỉ API Apps Script cung cấp danh sách việc làm
+            const sheetURL =
+                "https://script.google.com/macros/s/AKfycbzHhfEqDIkS7Q3tZm9rw0CNUJRvVp2uZQRh592Gqou3ret4Rs4jpftP1UgVEZBBoannAA/exec";
 
-</main>
+            // Các phần tử giao diện được dùng trong quá trình tìm kiếm và hiển thị
+            const jobList = document.getElementById("jobList");
+            const searchInput = document.getElementById("keywordSearch");
+            const salaryFilter = document.getElementById("salaryFilter");
+            const industryFilter = document.getElementById("industryFilter");
+            const jobCount = document.getElementById("jobCount");
 
-<footer>
-    <p>© 2026 VIỆC LÀM HẢI PHÒNG</p>
-    <p>Developed by <strong>Luong Fix</strong></p>
-    <p>
-        ✉ <a href="mailto:tuanluongpham@gmail.com">
-        tuanluongpham@gmail.com</a>
-    </p>
-</footer>
+            // Dữ liệu việc làm, mã tin trùng và trạng thái danh sách trước khi mở chi tiết
+            let allJobs = [];
+            let duplicateJobIds = new Set();
+            let listViewSnapshot = null;
 
-<script>
+            /* CHUYỂN DỮ LIỆU THÀNH CHỮ AN TOÀN */
+            function escapeHTML(value) {
+                return String(value || "").replace(
+                    /[&<>"']/g,
+                    (char) =>
+                        ({
+                            "&": "&amp;",
+                            "<": "&lt;",
+                            ">": "&gt;",
+                            '"': "&quot;",
+                            "'": "&#39;",
+                        })[char],
+                );
+            }
 
-const sheetURL = "https://script.google.com/macros/s/AKfycbzHhfEqDIkS7Q3tZm9rw0CNUJRvVp2uZQRh592Gqou3ret4Rs4jpftP1UgVEZBBoannAA/exec";
+            /* HIỂN THỊ CHI TIẾT MỘT TIN TUYỂN DỤNG */
+            function renderJobDetail(row) {
+                const status = String(row[10] || "").toLowerCase();
 
-const jobList = document.getElementById("jobList");
-const searchInput = document.getElementById("keywordSearch");
-const salaryFilter = document.getElementById("salaryFilter");
-const industryFilter = document.getElementById("industryFilter");
-const jobCount = document.getElementById("jobCount");
+                let statusHTML = '<span class="status-pending">Chưa xác minh</span>';
 
-let allJobs = [];
-let duplicateJobIds = new Set();
-let listViewSnapshot = null;
+                if (status.includes("hết hạn")) {
+                    statusHTML = '<span class="status-expired">Đã hết hạn</span>';
+                } else if (status.includes("đã kiểm tra thông tin cơ bản")) {
+                    statusHTML = '<span class="status-verified">✓ Đã kiểm tra thông tin</span>';
+                } else if (status.includes("đã xác minh")) {
+                    statusHTML = '<span class="status-verified">✓ Đã xác minh</span>';
+                }
 
-/* CHUYỂN DỮ LIỆU THÀNH CHỮ AN TOÀN */
-function escapeHTML(value) {
-    return String(value || "").replace(/[&<>"']/g, char => ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#39;"
-    })[char]);
+                document.querySelector(".search-box").style.display = "none";
+                document.querySelector(".section-heading").style.display = "none";
 
-}
+                jobCount.textContent = "";
 
-/* HIỂN THỊ CHI TIẾT MỘT TIN TUYỂN DỤNG */
-function renderJobDetail(row) {
-
-    const status = String(row[10] || "").toLowerCase();
-
-    let statusHTML = '<span class="status-pending">Chưa xác minh</span>';
-
-    if (status.includes("hết hạn")) {
-        statusHTML = '<span class="status-expired">Đã hết hạn</span>';
-    } else if (status.includes("đã kiểm tra thông tin cơ bản")) {
-        statusHTML = '<span class="status-verified">✓ Đã kiểm tra thông tin</span>';
-    } else if (status.includes("đã xác minh")) {
-        statusHTML = '<span class="status-verified">✓ Đã xác minh</span>';
-    }
-
-    document.querySelector(".search-box").style.display = "none";
-    document.querySelector(".section-heading").style.display = "none";
-
-    jobCount.textContent = "";
-
-    jobList.innerHTML = `
+                jobList.innerHTML = `
         <div class="job" style="grid-column: 1 / -1;">
 
             <h2>${escapeHTML(row[1])}</h2>
@@ -572,7 +594,9 @@ function renderJobDetail(row) {
 
                 <p><strong>Trạng thái:</strong> ${statusHTML}</p>
 
-                ${row[8] ? `
+                ${
+                    row[8]
+                        ? `
                     <p>
                        <a class="action-button"
    href="${escapeHTML(row[8])}"
@@ -581,7 +605,9 @@ function renderJobDetail(row) {
    Xem tin tuyển dụng gốc ↗
 </a>
                     </p>
-                ` : ""}
+                `
+                        : ""
+                }
             </div>
 
            
@@ -595,159 +621,145 @@ function renderJobDetail(row) {
 
         </div>
     `;
-}
+            }
 
-/* CHUYỂN QUA LẠI GIỮA DANH SÁCH VÀ CHI TIẾT */
+            /* Điều hướng giữa danh sách và chi tiết, đồng thời lưu trạng thái bộ lọc */
 
-jobList.addEventListener("click", function(event) {
+            jobList.addEventListener("click", function (event) {
+                // Khi bấm Xem chi tiết
+                const detailLink = event.target.closest(".job-detail-link");
 
-    // Khi bấm Xem chi tiết
-    const detailLink = event.target.closest(".job-detail-link");
+                if (detailLink) {
+                    event.preventDefault();
 
-    if (detailLink) {
-        event.preventDefault();
+                    const jobId = detailLink.dataset.jobId;
 
-        const jobId = detailLink.dataset.jobId;
+                    const matchedJobs = allJobs.filter(
+                        (row) => String(row[0] || "").trim() === jobId,
+                    );
 
-        const matchedJobs = allJobs.filter(row =>
-            String(row[0] || "").trim() === jobId
-        );
+                    if (matchedJobs.length !== 1 || duplicateJobIds.has(jobId)) {
+                        return;
+                    }
 
-        if (matchedJobs.length !== 1 || duplicateJobIds.has(jobId)) {
-            return;
-        }
+                    // Lưu trạng thái danh sách trước khi mở chi tiết
+                    listViewSnapshot = {
+                        html: jobList.innerHTML,
+                        count: jobCount.textContent,
+                        search: searchInput.value,
+                        salary: salaryFilter.value,
+                        industry: industryFilter.value,
+                        industryDisabled: industryFilter.disabled,
+                        searchDisplay: document.querySelector(".search-box").style.display,
+                        headingDisplay: document.querySelector(".section-heading").style.display,
+                        scrollY: window.scrollY,
+                    };
 
-        // Lưu trạng thái danh sách trước khi mở chi tiết
-        listViewSnapshot = {
-            html: jobList.innerHTML,
-            count: jobCount.textContent,
-            search: searchInput.value,
-            salary: salaryFilter.value,
-            industry: industryFilter.value,
-            industryDisabled: industryFilter.disabled,
-            searchDisplay: document.querySelector(".search-box").style.display,
-            headingDisplay: document.querySelector(".section-heading").style.display,
-            scrollY: window.scrollY
-        };
+                    // Đổi URL nhưng không tải lại trang
+                    history.pushState(
+                        { jobId: jobId },
+                        "",
+                        `${window.location.pathname}?id=${encodeURIComponent(jobId)}`,
+                    );
 
-        // Đổi URL nhưng không tải lại trang
-        history.pushState(
-            { jobId: jobId },
-            "",
-            `${window.location.pathname}?id=${encodeURIComponent(jobId)}`
-        );
+                    renderJobDetail(matchedJobs[0]);
+                    window.scrollTo(0, 0);
+                    return;
+                }
 
-        renderJobDetail(matchedJobs[0]);
-        window.scrollTo(0, 0);
-        return;
-    }
+                // Khi bấm Quay lại danh sách
+                const backLink = event.target.closest(".back-to-jobs");
 
-    // Khi bấm Quay lại danh sách
-    const backLink = event.target.closest(".back-to-jobs");
+                if (backLink) {
+                    event.preventDefault();
 
-    if (backLink) {
-        event.preventDefault();
+                    if (listViewSnapshot) {
+                        history.back();
+                    } else {
+                        history.replaceState({}, "", window.location.pathname);
+                        applyFilters();
+                        document.querySelector(".search-box").style.display = "";
+                        document.querySelector(".section-heading").style.display = "";
+                    }
+                }
+            });
 
-        if (listViewSnapshot) {
-            history.back();
-        } else {
-            history.replaceState({}, "", window.location.pathname);
-            applyFilters();
-            document.querySelector(".search-box").style.display = "";
-            document.querySelector(".section-heading").style.display = "";
-        }
-    }
-});
+            // Xử lý nút Back của trình duyệt và điện thoại
+            window.addEventListener("popstate", function () {
+                const requestedId = new URLSearchParams(window.location.search).get("id");
 
-// Xử lý nút Back của trình duyệt và điện thoại
-window.addEventListener("popstate", function() {
+                if (requestedId) {
+                    const matchedJobs = allJobs.filter(
+                        (row) => String(row[0] || "").trim() === requestedId,
+                    );
 
-    const requestedId = new URLSearchParams(window.location.search).get("id");
+                    if (matchedJobs.length === 1 && !duplicateJobIds.has(requestedId)) {
+                        renderJobDetail(matchedJobs[0]);
+                    }
+                } else if (listViewSnapshot) {
+                    jobList.innerHTML = listViewSnapshot.html;
+                    jobCount.textContent = listViewSnapshot.count;
 
-    if (requestedId) {
-        const matchedJobs = allJobs.filter(row =>
-            String(row[0] || "").trim() === requestedId
-        );
+                    searchInput.value = listViewSnapshot.search;
+                    salaryFilter.value = listViewSnapshot.salary;
+                    industryFilter.value = listViewSnapshot.industry;
+                    industryFilter.disabled = listViewSnapshot.industryDisabled;
 
-        if (matchedJobs.length === 1 && !duplicateJobIds.has(requestedId)) {
-            renderJobDetail(matchedJobs[0]);
-        }
+                    document.querySelector(".search-box").style.display =
+                        listViewSnapshot.searchDisplay;
 
-    } else if (listViewSnapshot) {
+                    document.querySelector(".section-heading").style.display =
+                        listViewSnapshot.headingDisplay;
 
-        jobList.innerHTML = listViewSnapshot.html;
-        jobCount.textContent = listViewSnapshot.count;
+                    window.scrollTo(0, listViewSnapshot.scrollY);
+                } else {
+                    applyFilters();
+                    document.querySelector(".search-box").style.display = "";
+                    document.querySelector(".section-heading").style.display = "";
+                }
+            });
 
-        searchInput.value = listViewSnapshot.search;
-        salaryFilter.value = listViewSnapshot.salary;
-        industryFilter.value = listViewSnapshot.industry;
-        industryFilter.disabled = listViewSnapshot.industryDisabled;
+            /* Nhận dữ liệu API, bỏ tin đã tuyển và phát hiện các mã tin bị trùng */
+            function displayJobs(rows, onlyLoad = false) {
+                const jobRows = rows
+                    .slice(1)
+                    .filter((row) => row[1] && String(row[10] || "").trim() !== "Đã tuyển");
 
-        document.querySelector(".search-box").style.display =
-            listViewSnapshot.searchDisplay;
+                const idCounts = new Map();
 
-        document.querySelector(".section-heading").style.display =
-            listViewSnapshot.headingDisplay;
+                jobRows.forEach((row) => {
+                    const id = String(row[0] || "").trim();
 
-        window.scrollTo(0, listViewSnapshot.scrollY);
+                    if (id) {
+                        idCounts.set(id, (idCounts.get(id) || 0) + 1);
+                    }
+                });
 
-    } else {
+                duplicateJobIds = new Set(
+                    [...idCounts.entries()].filter(([id, count]) => count > 1).map(([id]) => id),
+                );
 
-        applyFilters();
-        document.querySelector(".search-box").style.display = "";
-        document.querySelector(".section-heading").style.display = "";
-    }
-});
+                allJobs = jobRows;
+                if (onlyLoad) return;
 
+                console.log("Số mã tin bị trùng:", duplicateJobIds.size);
+                console.log("Danh sách mã trùng:", [...duplicateJobIds]);
+                // Chỉ nạp dữ liệu, chưa hiển thị
+                if (onlyLoad) return;
 
-/* NHẬN DỮ LIỆU VÀ KIỂM TRA MÃ TIN */
-function displayJobs(rows, onlyLoad = false) {
+                const requestedId = new URLSearchParams(window.location.search).get("id");
 
-    const jobRows = rows.slice(1).filter(row =>
-        row[1] && String(row[10] || "").trim() !== "Đã tuyển"
-    );
+                if (requestedId) {
+                    const matchedJobs = allJobs.filter(
+                        (row) => String(row[0] || "").trim() === requestedId.trim(),
+                    );
 
-    const idCounts = new Map();
+                    if (matchedJobs.length === 1 && !duplicateJobIds.has(requestedId.trim())) {
+                        renderJobDetail(matchedJobs[0]);
+                    } else {
+                        jobCount.textContent = "";
 
-    jobRows.forEach(row => {
-        const id = String(row[0] || "").trim();
-
-        if (id) {
-            idCounts.set(id, (idCounts.get(id) || 0) + 1);
-        }
-    });
-
-    duplicateJobIds = new Set(
-        [...idCounts.entries()]
-            .filter(([id, count]) => count > 1)
-            .map(([id]) => id)
-    );
-
-    allJobs = jobRows;
-    if (onlyLoad) return;
-
-    console.log("Số mã tin bị trùng:", duplicateJobIds.size);
-    console.log("Danh sách mã trùng:", [...duplicateJobIds]);
-// Chỉ nạp dữ liệu, chưa hiển thị
-if (onlyLoad) return;
-    
-const requestedId = new URLSearchParams(window.location.search).get("id");
-
-if (requestedId) {
-
-    const matchedJobs = allJobs.filter(row =>
-        String(row[0] || "").trim() === requestedId.trim()
-    );
-
-    if (matchedJobs.length === 1 && !duplicateJobIds.has(requestedId.trim())) {
-
-        renderJobDetail(matchedJobs[0]);
-
-    } else {
-
-        jobCount.textContent = "";
-
-        jobList.innerHTML = `
+                        jobList.innerHTML = `
             <div class="job">
                 <h3>Không tìm thấy tin tuyển dụng</h3>
                 <p>Tin có thể đã bị gỡ hoặc mã tin không hợp lệ.</p>
@@ -756,485 +768,578 @@ if (requestedId) {
                 </a>
             </div>
         `;
-    }
-
-} else {
-
-    applyFilters();
-
-}
-
-}
-const categoryKeywords = {
-    accounting: [
-        "kế toán", "kiểm toán", "tài chính", "thuế",
-        "công nợ", "ngân quỹ", "kế toán nội bộ",
-        "kế toán trưởng", "kế toán kho", "kế toán tổng hợp",
-        "kế toán thanh toán", "kế toán bán hàng",
-        "kế toán xuất nhập khẩu", "kiểm soát tài chính"
-    ],
-
-    business: [
-    "nhân viên kinh doanh",
-    "chuyên viên kinh doanh",
-    "trưởng phòng kinh doanh",
-    "giám đốc kinh doanh",
-    "quản lý kinh doanh",
-    "phát triển kinh doanh",
-    "phát triển thị trường",
-    "đại diện kinh doanh",
-    "phát triển đại lý",
-    "tư vấn bán hàng",
-    "nhân viên bán hàng",
-    "chuyên viên bán hàng",
-   "sales executive",
-"sales manager",
-"sales representative",
-"sales consultant",
-"sales admin",
-"business development"
-],
-
-    hr: [
-        "nhân sự", "tuyển dụng", "hành chính nhân sự",
-        "chấm công", "tiền lương", "c&b",
-        "quan hệ lao động", "đào tạo nhân viên",
-        "chuyên viên nhân sự", "trưởng phòng nhân sự",
-        "quản lý nhân sự", "bảo hiểm xã hội"
-    ],
-
-  office: [
-    "nhân viên hành chính",
-    "chuyên viên hành chính",
-    "trưởng phòng hành chính",
-    "nhân viên nhân sự",
-    "chuyên viên nhân sự",
-    "hành chính nhân sự",
-    "nhân viên văn phòng",
-    "nhân viên văn thư",
-    "trợ lý giám đốc",
-    "trợ lý",
-    "thư ký",
-    "quản trị văn phòng",
-    "quản lý văn phòng",
-    "giám đốc điều hành",
-    "tổng giám đốc",
-    "phó giám đốc",
-    "giám đốc",
-    "nhà quản lý"
-],
-
- logistics: [
-    "logistics",
-    "xuất nhập khẩu",
-    "nhân viên xuất nhập khẩu",
-    "chuyên viên xuất nhập khẩu",
-    "khai báo hải quan",
-    "nhân viên hải quan",
-    "chứng từ xuất nhập khẩu",
-    "chứng từ logistics",
-    "giao nhận quốc tế",
-    "forwarder",
-    "freight forwarding",
-    "điều phối logistics",
-    "quản lý logistics",
-    "chuỗi cung ứng",
-    "supply chain",
-    "nhân viên điều phối vận tải",
-    "điều phối vận tải",
-    "nhân viên kho vận",
-    "quản lý kho vận"
-],
-    technical: [
-    // Kỹ thuật, cơ điện, điện
-    "kỹ thuật viên", "nhân viên kỹ thuật",
-    "kỹ sư kỹ thuật", "kỹ sư cơ điện",
-    "kỹ sư điện", "kỹ sư cơ khí",
-    "kỹ thuật cơ điện", "kỹ thuật điện",
-    "kỹ thuật cơ khí", "điện công nghiệp",
-    "điện dân dụng", "thợ điện",
-    "thợ máy", "thợ cơ khí",
-
-    // Bảo trì, sửa chữa
-    "bảo trì", "bảo dưỡng", "nhân viên bảo trì",
-    "kỹ thuật bảo trì", "kỹ sư bảo trì",
-    "nhân viên bảo dưỡng", "kỹ thuật bảo dưỡng",
-    "sửa chữa máy móc", "sửa chữa thiết bị",
-    "cơ điện", "cơ điện tử",
-    "bảo trì thiết bị", "bảo trì máy móc",
-
-    // Tự động hóa, điều khiển
-    "tự động hóa", "plc", "biến tần",
-    "điều khiển công nghiệp", "vận hành hệ thống",
-
-    // Vận hành máy, sản xuất
-    "vận hành máy", "công nhân vận hành",
-    "lao động kỹ thuật", "kỹ thuật may",
-    "dệt", "giày dép", "sản xuất thùng hộp",
-    "hướng dẫn sản xuất", "quản lý sản xuất",
-    "giám sát sản xuất", "trưởng phòng sản xuất",
-    "giám đốc sản xuất", "quản lý kỹ thuật sản xuất",
-
-    // Kiểm soát chất lượng
-    "kiểm soát chất lượng", "quản lý chất lượng",
-    "giám đốc chất lượng", "trưởng phòng chất lượng",
-    "nhân viên qc", "nhân viên qa",
-    "kỹ thuật qc", "kỹ thuật qa"
-],
-environment: [
-   
-    "nhân viên môi trường",
-    "kỹ thuật môi trường",
-    "kỹ sư môi trường",
-    "xử lý nước thải",
-    "vận hành hệ thống xử lý nước thải",
-    "quan trắc môi trường",
-    "xử lý chất thải",
-    "chất thải công nghiệp",
-    "xử lý khí thải"
-],
-
-   service: [
-    // Bán hàng, kinh doanh
-    "bán hàng", "nhân viên bán hàng",
-    "chuyên viên bán hàng", "kinh doanh",
-    "nhân viên kinh doanh", "sales",
-    "sales consultant", "tư vấn bán hàng",
-    "tư vấn sản phẩm", "tư vấn khách hàng",
-
-    // Chăm sóc và dịch vụ khách hàng
-    "chăm sóc khách hàng", "tổng đài viên",
-    "customer service", "customer care",
-
-    // Nhà hàng, khách sạn, du lịch
-    "nhà hàng", "khách sạn", "lễ tân",
-    "phục vụ", "nhân viên phục vụ",
-    "bếp", "đầu bếp", "pha chế",
-    "thu ngân", "buồng phòng", "spa",
-    "du lịch", "điều hành tour",
-    "tiếp tân", "bán lẻ"
-],
-
-security: [
-    "bảo vệ", "nhân viên an ninh",
-    "nhân viên bảo vệ", "bảo vệ cổng",
-    "bảo vệ giám sát", "giám sát bảo vệ",
-    "trưởng ca bảo vệ", "đội trưởng bảo vệ",
-    "nhân viên kiểm soát an ninh",
-    "nhân viên tuần tra"
-],
-
-it: [
-    "nhân viên it", "kỹ thuật viên it",
-    "chuyên viên it", "quản trị viên it",
-    "it support", "it helpdesk",
-    "helpdesk", "lập trình viên",
-    "lập trình web", "web developer",
-    "software developer", "developer",
-    "system administrator", "quản trị mạng",
-    "quản trị hệ thống", "kỹ sư phần mềm",
-    "kiểm thử phần mềm", "tester",
-    "chuyên viên công nghệ thông tin",
-    "nhân viên công nghệ thông tin"
-],
-driver: [
-    "tài xế", "lái xe", "lái xe tải",
-    "lái xe container", "lái xe đầu kéo",
-    "lái xe công ty", "lái xe nâng",
-    "nhân viên lái xe", "tài xế giao hàng",
-    "nhân viên giao hàng", "phụ xe"
-],
-
-labor: [
-    "lao động phổ thông", "công nhân",
-    "công nhân thời vụ", "đóng gói",
-    "đóng hàng", "bốc xếp", "phụ kho",
-    "tạp vụ", "vệ sinh công nghiệp",
-    "nhân viên vệ sinh", "nhân viên kho",
-    "sơ chế", "chế biến thực phẩm",
-    "lắp ráp", "kiểm hàng", "phân loại hàng"
-]
-};
-/* LỌC TỪ KHÓA VÀ MỨC LƯƠNG */
-function applyFilters() {
-
-    const keyword = searchInput.value.toLowerCase().trim();
-    const salary = salaryFilter.value;
-const industry = industryFilter.value;
-
-// Chuẩn hóa chữ để tìm kiếm có hoặc không có dấu
-const normalizeText = str => String(str || "")
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/đ/g, "d");
-
-// Các từ khóa liên quan
-const searchSynonyms = {
-    "to truong": [
-        "truong ca", "truong nhom", "to pho",
-        "giam sat", "quan doc", "quan ly to"
-    ],
-
-    "bao tri": [
-        "ky thuat bao tri", "nhan vien bao tri",
-        "ky thuat vien bao tri", "co dien",
-        "sua chua", "maintenance"
-    ],
-
-    "ky thuat": [
-        "ky thuat vien", "nhan vien ky thuat",
-        "co dien", "dien cong nghiep",
-        "co khi", "bao tri", "sua chua"
-    ],
-
-    "cong nhan": [
-        "lao dong pho thong", "san xuat",
-        "lap rap", "dong goi"
-    ],
-
-    "nhan vien kho": [
-        "thu kho", "quan ly kho",
-        "phu kho", "kiem hang"
-    ],
-
-   "hr": [
-    "nhan su",
-    "human resources",
-    "hanh chinh nhan su",
-    "nhan vien nhan su",
-    "chuyen vien nhan su",
-    "truong phong nhan su",
-    "quan ly nhan su",
-    "hr manager",
-    "hr specialist",
-    "hr staff"
-],
-
-    "it": [
-        "cong nghe thong tin", "it support",
-        "helpdesk", "lap trinh vien",
-        "quan tri mang", "quan tri he thong"
-    ],
-
-    "qc": [
-        "kiem soat chat luong",
-        "kiem tra chat luong",
-        "quality control"
-    ],
-
-    "qa": [
-        "dam bao chat luong",
-        "quan ly chat luong",
-        "quality assurance"
-    ]
-};
-
-const normalizedKeyword = normalizeText(keyword);
-
-const matchedSynonymKey = searchSynonyms[normalizedKeyword]
-    ? normalizedKeyword
-    : null;
-
-const searchTerms = [
-    normalizedKeyword,
-    ...(matchedSynonymKey
-        ? searchSynonyms[matchedSynonymKey]
-        : [])
-].filter(Boolean);
-
-// THÊM 2 DÒNG NÀY
-console.log("Từ khóa chuẩn hóa:", normalizedKeyword);
-console.log("Danh sách từ khóa tìm kiếm:", searchTerms);
-
-console.log("Ngành đang chọn:", industry);
-
-const hasActiveFilters =
-    keyword !== "" ||
-    salary !== "all" ||
-    industry !== "all";
-
-const sourceJobs = hasActiveFilters
-    ? allJobs
-    : allJobs.slice(0, 10);
-
-const jobs = sourceJobs.filter(row => {
-
-        const text = row.join(" ").toLowerCase();
-        const titleText = String(row[1] || "").toLowerCase();
-        const salaryText = String(row[4] || "").toLowerCase();
-
-        const normalizedText = normalizeText(text);
-
-const acronymKeywords = ["hr", "it", "qc", "qa"];
-
-const titleNormalized = normalizeText(titleText);
-
-const hrTerms = [
-    "hr",
-    "nhan su",
-    "human resources",
-    "tuyen dung",
-    "recruitment",
-    "hanh chinh nhan su",
-    "hanh chinh",
-    "cham cong",
-    "tien luong",
-    "c&b",
-    "bao hiem",
-    "phuc loi",
-    "quan he lao dong",
-    "hr manager",
-    "hr specialist",
-    "hr staff"
-];
-
-// Các chức danh liên quan đến bảo trì
-
-const maintenanceTerms = [
-    // Bảo trì, bảo dưỡng
-    "bao tri",
-    "bao duong",
-    "sua chua may",
-    "sua chua thiet bi",
-    "bao duong may",
-    "bao duong thiet bi",
-    "ky thuat bao tri",
-    "nhan vien bao tri",
-    "ky thuat vien bao tri",
-    "bao tri dien",
-    "bao tri co dien",
-    "maintenance",
-
-    // Cơ điện
-    "co dien",
-    "ky thuat co dien",
-    "ky su co dien",
-    "nhan vien co dien",
-    "dien cong nghiep",
-    "ky thuat dien",
-    "ky thuat vien dien",
-    "ky thuat vien me",
-    "ky thuat vien thiet bi",
-    "ky thuat vien may",
-    "m&e"
-];
-
-
-let matchKeyword = !normalizedKeyword;
-
-if (normalizedKeyword === "hr") {
-    matchKeyword = hrTerms.some(term => {
-        if (term === "hr") {
-            return /(^|[^a-z0-9])hr([^a-z0-9]|$)/.test(titleNormalized);
-        }
-        return titleNormalized.includes(term);
-    });
-
-} else if (normalizedKeyword === "bao tri") {
-    matchKeyword = maintenanceTerms.some(term =>
-        titleNormalized.includes(term)
-    );
-
-} else {
-    matchKeyword = matchKeyword || searchTerms.some(term => {
-        if (acronymKeywords.includes(normalizedKeyword) && term === normalizedKeyword) {
-            const regex = new RegExp("(^|[^a-z0-9])" + term + "([^a-z0-9]|$)");
-            return regex.test(titleNormalized);
-        }
-        return normalizedText.includes(term);
-    });
-}
-
-
-if (normalizedKeyword === "hr") {
-    console.log(titleText, "=>", matchKeyword);
-}
-        const numbers = salaryText.match(/\d+(?:[.,]\d+)?/g);
-
-        const min = numbers
-            ? parseFloat(numbers[0].replace(",", "."))
-            : null;
-
-        const max = numbers && numbers.length > 1
-            ? parseFloat(numbers[1].replace(",", "."))
-            : min;
-
-        let matchSalary = true;
-
-        if (salary === "under7") {
-            matchSalary = min !== null && min < 7;
-        } else if (salary === "7-10") {
-            matchSalary = min !== null && max >= 7 && min <= 10;
-        } else if (salary === "10-15") {
-            matchSalary = min !== null && max >= 10 && min <= 15;
-        } else if (salary === "15-20") {
-            matchSalary = min !== null && max >= 15 && min <= 20;
-        } else if (salary === "over20") {
-            matchSalary = max !== null && max > 20;
-        } else if (salary === "negotiable") {
-            matchSalary = salaryText.includes("thỏa thuận");
-        } else if (salary === "unknown") {
-            matchSalary = !salaryText || !numbers;
-        }
-
-      
-   
-
-
-const matchIndustry = industry === "all" ||
-    ([
-        "environment",
-        "security",
-        "it",
-        "driver",
-        "labor",
-        "logistics",
-        "office",
-        "business",
-           "service",
-            "technical"
-    ].includes(industry)
-        ? categoryKeywords[industry].some(word =>
-            normalizeText(titleText).includes(normalizeText(word))
-          )
-        : categoryKeywords[industry].some(word =>
-            normalizedText.includes(normalizeText(word))
-          )
-    );
-
-return matchKeyword && matchSalary && matchIndustry;
-    });
-
-    console.log("Số tin sau lọc:", jobs.length);
-    renderJobs(jobs);
-}
-
-/* HIỂN THỊ DANH SÁCH VIỆC LÀM */
-function renderJobs(jobs) {
-
-    jobCount.textContent = "Tìm thấy " + jobs.length + " việc làm";
-
-    if (jobs.length === 0) {
-        jobList.innerHTML =
-            "<p>Không tìm thấy việc làm phù hợp. Bạn hãy thử từ khóa khác.</p>";
-        return;
-    }
-
-    jobList.innerHTML = jobs.map(row => `
+                    }
+                } else {
+                    applyFilters();
+                }
+            }
+            /* Từ khóa chức danh dùng để phân loại tin theo từng ngành nghề */
+            const categoryKeywords = {
+                accounting: [
+                    "kế toán",
+                    "kiểm toán",
+                    "tài chính",
+                    "thuế",
+                    "công nợ",
+                    "ngân quỹ",
+                    "kế toán nội bộ",
+                    "kế toán trưởng",
+                    "kế toán kho",
+                    "kế toán tổng hợp",
+                    "kế toán thanh toán",
+                    "kế toán bán hàng",
+                    "kế toán xuất nhập khẩu",
+                    "kiểm soát tài chính",
+                    "thủ quỹ",
+                    "nhân viên quỹ",
+                    "nv quỹ",
+                    "giao dịch viên",
+                ],
+
+                business: [
+                    "nhân viên kinh doanh",
+                    "chuyên viên kinh doanh",
+                    "trưởng phòng kinh doanh",
+                    "giám đốc kinh doanh",
+                    "quản lý kinh doanh",
+                    "phát triển kinh doanh",
+                    "phát triển thị trường",
+                    "đại diện kinh doanh",
+                    "phát triển đại lý",
+                    "tư vấn bán hàng",
+                    "nhân viên bán hàng",
+                    "chuyên viên bán hàng",
+                    "sales executive",
+                    "sales manager",
+                    "sales representative",
+                    "sales consultant",
+                    "sales admin",
+                    "business development",
+                ],
+
+                hr: [
+                    "nhân sự",
+                    "tuyển dụng",
+                    "hành chính nhân sự",
+                    "chấm công",
+                    "tiền lương",
+                    "c&b",
+                    "quan hệ lao động",
+                    "đào tạo nhân viên",
+                    "chuyên viên nhân sự",
+                    "trưởng phòng nhân sự",
+                    "quản lý nhân sự",
+                    "bảo hiểm xã hội",
+                ],
+
+                education: [
+                    "giáo viên",
+                    "giảng viên",
+                    "trợ giảng",
+                    "gia sư",
+                    "giáo vụ",
+                    "tư vấn giáo dục",
+                ],
+
+                office: [
+                    "nhân viên hành chính",
+                    "chuyên viên hành chính",
+                    "trưởng phòng hành chính",
+                    "nhân viên văn phòng",
+                    "nhân viên văn thư",
+                    "trợ lý giám đốc",
+                    "trợ lý",
+                    "thư ký",
+                    "quản trị văn phòng",
+                    "quản lý văn phòng",
+                ],
+
+                logistics: [
+                    "logistics",
+                    "xuất nhập khẩu",
+                    "nhân viên xuất nhập khẩu",
+                    "chuyên viên xuất nhập khẩu",
+                    "khai báo hải quan",
+                    "nhân viên hải quan",
+                    "chứng từ xuất nhập khẩu",
+                    "chứng từ logistics",
+                    "giao nhận quốc tế",
+                    "forwarder",
+                    "freight forwarding",
+                    "điều phối logistics",
+                    "quản lý logistics",
+                    "chuỗi cung ứng",
+                    "supply chain",
+                    "nhân viên điều phối vận tải",
+                    "điều phối vận tải",
+                    "điều phối vận hành vận tải",
+                    "nhân viên kho vận",
+                    "quản lý kho vận",
+                ],
+                technical: [
+                    // Kỹ thuật, cơ điện, điện
+                    "kỹ thuật viên",
+                    "nhân viên kỹ thuật",
+                    "kỹ sư kỹ thuật",
+                    "kỹ sư cơ điện",
+                    "kỹ sư điện",
+                    "kỹ sư cơ khí",
+                    "kỹ thuật cơ điện",
+                    "kỹ thuật điện",
+                    "kỹ thuật cơ khí",
+                    "điện công nghiệp",
+                    "điện dân dụng",
+                    "thợ điện",
+                    "thợ máy",
+                    "thợ cơ khí",
+
+                    // Bảo trì, sửa chữa
+                    "bảo trì",
+                    "bảo dưỡng",
+                    "nhân viên bảo trì",
+                    "kỹ thuật bảo trì",
+                    "kỹ sư bảo trì",
+                    "nhân viên bảo dưỡng",
+                    "kỹ thuật bảo dưỡng",
+                    "sửa chữa máy móc",
+                    "sửa chữa thiết bị",
+                    "cơ điện",
+                    "cơ điện tử",
+                    "bảo trì thiết bị",
+                    "bảo trì máy móc",
+
+                    // Tự động hóa, điều khiển
+                    "tự động hóa",
+                    "plc",
+                    "biến tần",
+                    "điều khiển công nghiệp",
+                    "vận hành hệ thống",
+
+                    // Vận hành máy, sản xuất
+                    "vận hành máy",
+                    "công nhân vận hành",
+                    "lao động kỹ thuật",
+                    "kỹ thuật may",
+                    "dệt",
+                    "giày dép",
+                    "sản xuất thùng hộp",
+                    "hướng dẫn sản xuất",
+                    "quản lý sản xuất",
+                    "giám sát sản xuất",
+                    "trưởng phòng sản xuất",
+                    "giám đốc sản xuất",
+                    "quản lý kỹ thuật sản xuất",
+                ],
+                quality: [
+                    "qa",
+                    "qc",
+                    "qa/qc",
+                    "đảm bảo chất lượng",
+                    "kiểm soát chất lượng",
+                    "kiểm tra chất lượng",
+                    "quản lý chất lượng",
+                    "bộ phận chất lượng",
+                    "giám đốc chất lượng",
+                    "trưởng phòng chất lượng",
+                    "trưởng bộ phận qa",
+                    "trưởng bộ phận qc",
+                    "nhân viên qa",
+                    "nhân viên qc",
+                    "kỹ thuật qa",
+                    "kỹ thuật qc",
+                    "kỹ thuật viên chất lượng",
+                    "chuyên viên chất lượng",
+                    "quality assurance",
+                    "quality control",
+                    "quality inspector",
+                    "quality engineer",
+                ],
+                environment: [
+                    "nhân viên môi trường",
+                    "kỹ thuật môi trường",
+                    "kỹ sư môi trường",
+                    "xử lý nước thải",
+                    "vận hành hệ thống xử lý nước thải",
+                    "quan trắc môi trường",
+                    "xử lý chất thải",
+                    "chất thải công nghiệp",
+                    "xử lý khí thải",
+                ],
+
+                service: [
+                    // Chăm sóc và dịch vụ khách hàng
+                    "chăm sóc khách hàng",
+                    "tổng đài viên",
+                    "customer service",
+                    "customer care",
+
+                    // Nhà hàng, khách sạn, du lịch
+                    "nhà hàng",
+                    "khách sạn",
+                    "lễ tân",
+                    "phục vụ",
+                    "nhân viên phục vụ",
+                    "bếp",
+                    "đầu bếp",
+                    "pha chế",
+                    "thu ngân",
+                    "buồng phòng",
+                    "spa",
+                    "du lịch",
+                    "điều hành tour",
+                    "tiếp tân",
+                    "bán lẻ",
+                ],
+
+                security: [
+                    "bảo vệ",
+                    "nhân viên an ninh",
+                    "nhân viên bảo vệ",
+                    "bảo vệ cổng",
+                    "bảo vệ giám sát",
+                    "giám sát bảo vệ",
+                    "trưởng ca bảo vệ",
+                    "đội trưởng bảo vệ",
+                    "nhân viên kiểm soát an ninh",
+                    "nhân viên tuần tra",
+                ],
+
+                it: [
+                    "nhân viên it",
+                    "kỹ thuật viên it",
+                    "chuyên viên it",
+                    "quản trị viên it",
+                    "it support",
+                    "it helpdesk",
+                    "helpdesk",
+                    "lập trình viên",
+                    "lập trình web",
+                    "web developer",
+                    "software developer",
+                    "developer",
+                    "system administrator",
+                    "quản trị mạng",
+                    "quản trị hệ thống",
+                    "kỹ sư phần mềm",
+                    "kiểm thử phần mềm",
+                    "tester",
+                    "chuyên viên công nghệ thông tin",
+                    "nhân viên công nghệ thông tin",
+                ],
+                driver: [
+                    "tài xế",
+                    "lái xe",
+                    "lái xe tải",
+                    "lái xe container",
+                    "lái xe đầu kéo",
+                    "lái xe công ty",
+                    "lái xe nâng",
+                    "nhân viên lái xe",
+                    "tài xế giao hàng",
+                    "nhân viên giao hàng",
+                    "phụ xe",
+                ],
+
+                labor: [
+                    "lao động phổ thông",
+                    "công nhân",
+                    "công nhân thời vụ",
+                    "đóng gói",
+                    "đóng hàng",
+                    "bốc xếp",
+                    "phụ kho",
+                    "tạp vụ",
+                    "vệ sinh công nghiệp",
+                    "nhân viên vệ sinh",
+                    "nhân viên kho",
+                    "sơ chế",
+                    "chế biến thực phẩm",
+                    "lắp ráp",
+                    "kiểm hàng",
+                    "phân loại hàng",
+                ],
+            };
+            /* Từ khóa loại trừ để hạn chế tin lọt vào ngành nghề không phù hợp */
+            const industryExclusions = {
+                technical: ["chẩn đoán hình ảnh", "chất lượng", "qa", "qc"],
+            };
+            /* Chuẩn hóa và áp dụng đồng thời bộ lọc từ khóa, ngành nghề và mức lương */
+            function applyFilters() {
+                const keyword = searchInput.value.toLowerCase().trim();
+                const salary = salaryFilter.value;
+                const industry = industryFilter.value;
+
+                // Chuẩn hóa chữ để tìm kiếm có hoặc không có dấu
+                const normalizeText = (str) =>
+                    String(str || "")
+                        .toLowerCase()
+                        .normalize("NFD")
+                        .replace(/[\u0300-\u036f]/g, "")
+                        .replace(/đ/g, "d");
+
+                // Các từ khóa liên quan
+                const searchSynonyms = {
+                    "to truong": [
+                        "truong ca",
+                        "truong nhom",
+                        "to pho",
+                        "giam sat",
+                        "quan doc",
+                        "quan ly to",
+                    ],
+
+                    "bao tri": [
+                        "ky thuat bao tri",
+                        "nhan vien bao tri",
+                        "ky thuat vien bao tri",
+                        "co dien",
+                        "sua chua",
+                        "maintenance",
+                    ],
+
+                    "ky thuat": [
+                        "ky thuat vien",
+                        "nhan vien ky thuat",
+                        "co dien",
+                        "dien cong nghiep",
+                        "co khi",
+                        "bao tri",
+                        "sua chua",
+                    ],
+
+                    "cong nhan": ["lao dong pho thong", "san xuat", "lap rap", "dong goi"],
+
+                    "nhan vien kho": ["thu kho", "quan ly kho", "phu kho", "kiem hang"],
+
+                    hr: [
+                        "nhan su",
+                        "human resources",
+                        "hanh chinh nhan su",
+                        "nhan vien nhan su",
+                        "chuyen vien nhan su",
+                        "truong phong nhan su",
+                        "quan ly nhan su",
+                        "hr manager",
+                        "hr specialist",
+                        "hr staff",
+                    ],
+
+                    it: [
+                        "cong nghe thong tin",
+                        "it support",
+                        "helpdesk",
+                        "lap trinh vien",
+                        "quan tri mang",
+                        "quan tri he thong",
+                    ],
+
+                    qc: ["kiem soat chat luong", "kiem tra chat luong", "quality control"],
+
+                    qa: ["dam bao chat luong", "quan ly chat luong", "quality assurance"],
+                };
+
+                const normalizedKeyword = normalizeText(keyword);
+
+                const matchedSynonymKey = searchSynonyms[normalizedKeyword]
+                    ? normalizedKeyword
+                    : null;
+
+                const searchTerms = [
+                    normalizedKeyword,
+                    ...(matchedSynonymKey ? searchSynonyms[matchedSynonymKey] : []),
+                ].filter(Boolean);
+
+                // THÊM 2 DÒNG NÀY
+                console.log("Từ khóa chuẩn hóa:", normalizedKeyword);
+                console.log("Danh sách từ khóa tìm kiếm:", searchTerms);
+
+                console.log("Ngành đang chọn:", industry);
+
+                const hasActiveFilters = keyword !== "" || salary !== "all" || industry !== "all";
+
+                const sourceJobs = hasActiveFilters ? allJobs : allJobs.slice(0, 10);
+
+                const jobs = sourceJobs.filter((row) => {
+                    const text = row.join(" ").toLowerCase();
+                    const titleText = String(row[1] || "").toLowerCase();
+                    const salaryText = String(row[4] || "").toLowerCase();
+
+                    const normalizedText = normalizeText(text);
+
+                    const acronymKeywords = ["hr", "it", "qc", "qa"];
+
+                    const titleNormalized = normalizeText(titleText);
+                    const matchesTitleTerm = (term) => {
+                        const normalizedTerm = normalizeText(term);
+
+                        if (acronymKeywords.includes(normalizedTerm)) {
+                            const regex = new RegExp(
+                                "(^|[^a-z0-9])" + normalizedTerm + "([^a-z0-9]|$)",
+                            );
+                            return regex.test(titleNormalized);
+                        }
+
+                        return titleNormalized.includes(normalizedTerm);
+                    };
+
+                    const hrTerms = [
+                        "hr",
+                        "nhan su",
+                        "human resources",
+                        "tuyen dung",
+                        "recruitment",
+                        "hanh chinh nhan su",
+                        "hanh chinh",
+                        "cham cong",
+                        "tien luong",
+                        "c&b",
+                        "bao hiem",
+                        "phuc loi",
+                        "quan he lao dong",
+                        "hr manager",
+                        "hr specialist",
+                        "hr staff",
+                    ];
+
+                    // Các chức danh liên quan đến bảo trì
+
+                    const maintenanceTerms = [
+                        // Bảo trì, bảo dưỡng
+                        "bao tri",
+                        "bao duong",
+                        "sua chua may",
+                        "sua chua thiet bi",
+                        "bao duong may",
+                        "bao duong thiet bi",
+                        "ky thuat bao tri",
+                        "nhan vien bao tri",
+                        "ky thuat vien bao tri",
+                        "bao tri dien",
+                        "bao tri co dien",
+                        "maintenance",
+
+                        // Cơ điện
+                        "co dien",
+                        "ky thuat co dien",
+                        "ky su co dien",
+                        "nhan vien co dien",
+                        "dien cong nghiep",
+                        "ky thuat dien",
+                        "ky thuat vien dien",
+                        "ky thuat vien me",
+                        "ky thuat vien thiet bi",
+                        "ky thuat vien may",
+                        "m&e",
+                    ];
+
+                    let matchKeyword = !normalizedKeyword;
+
+                    if (normalizedKeyword === "hr") {
+                        matchKeyword = hrTerms.some((term) => {
+                            if (term === "hr") {
+                                return /(^|[^a-z0-9])hr([^a-z0-9]|$)/.test(titleNormalized);
+                            }
+                            return titleNormalized.includes(term);
+                        });
+                    } else if (normalizedKeyword === "bao tri") {
+                        matchKeyword = maintenanceTerms.some((term) =>
+                            titleNormalized.includes(term),
+                        );
+                    } else {
+                        matchKeyword =
+                            matchKeyword ||
+                            searchTerms.some((term) => {
+                                if (
+                                    acronymKeywords.includes(normalizedKeyword) &&
+                                    term === normalizedKeyword
+                                ) {
+                                    const regex = new RegExp(
+                                        "(^|[^a-z0-9])" + term + "([^a-z0-9]|$)",
+                                    );
+                                    return regex.test(titleNormalized);
+                                }
+                                return normalizedText.includes(term);
+                            });
+                    }
+
+                    if (normalizedKeyword === "hr") {
+                        console.log(titleText, "=>", matchKeyword);
+                    }
+                    const numbers = salaryText.match(/\d+(?:[.,]\d+)?/g);
+
+                    const min = numbers ? parseFloat(numbers[0].replace(",", ".")) : null;
+
+                    const max =
+                        numbers && numbers.length > 1
+                            ? parseFloat(numbers[1].replace(",", "."))
+                            : min;
+
+                    let matchSalary = true;
+
+                    if (salary === "under7") {
+                        matchSalary = min !== null && min < 7;
+                    } else if (salary === "7-10") {
+                        matchSalary = min !== null && max >= 7 && min <= 10;
+                    } else if (salary === "10-15") {
+                        matchSalary = min !== null && max >= 10 && min <= 15;
+                    } else if (salary === "15-20") {
+                        matchSalary = min !== null && max >= 15 && min <= 20;
+                    } else if (salary === "over20") {
+                        matchSalary = max !== null && max > 20;
+                    } else if (salary === "negotiable") {
+                        matchSalary = salaryText.includes("thỏa thuận");
+                    } else if (salary === "unknown") {
+                        matchSalary = !salaryText || !numbers;
+                    }
+
+                    const excludedByIndustry = (industryExclusions[industry] || []).some((word) =>
+                        matchesTitleTerm(word),
+                    );
+
+                    const matchIndustry =
+                        industry === "all" ||
+                        (!excludedByIndustry &&
+                            categoryKeywords[industry].some((word) => matchesTitleTerm(word)));
+
+                    return matchKeyword && matchSalary && matchIndustry;
+                });
+
+                console.log("Số tin sau lọc:", jobs.length);
+                renderJobs(jobs);
+            }
+
+            /* HIỂN THỊ DANH SÁCH VIỆC LÀM */
+            function renderJobs(jobs) {
+                jobCount.textContent = "Tìm thấy " + jobs.length + " việc làm";
+
+                if (jobs.length === 0) {
+                    jobList.innerHTML =
+                        "<p>Không tìm thấy việc làm phù hợp. Bạn hãy thử từ khóa khác.</p>";
+                    return;
+                }
+
+                jobList.innerHTML = jobs
+                    .map(
+                        (row) => `
         <div class="job">
 
             <h3>${escapeHTML(row[1])}</h3>
 
 <div class="job-status">
     ${
-        String(row[10] || "").toLowerCase().includes("đã hết hạn")
+        String(row[10] || "")
+            .toLowerCase()
+            .includes("đã hết hạn")
             ? '<span class="status-expired">Đã hết hạn</span>'
-            : String(row[10] || "").toLowerCase().includes("đã kiểm tra thông tin cơ bản")
-                ? '<span class="status-verified">✓ Đã kiểm tra thông tin</span>'
-                : String(row[10] || "").toLowerCase().includes("đã xác minh")
-                    ? '<span class="status-verified">✓ Đã xác minh</span>'
-                    : '<span class="status-pending">Chưa xác minh</span>'
+            : String(row[10] || "")
+                    .toLowerCase()
+                    .includes("đã kiểm tra thông tin cơ bản")
+              ? '<span class="status-verified">✓ Đã kiểm tra thông tin</span>'
+              : String(row[10] || "")
+                      .toLowerCase()
+                      .includes("đã xác minh")
+                ? '<span class="status-verified">✓ Đã xác minh</span>'
+                : '<span class="status-pending">Chưa xác minh</span>'
     }
 </div>
 
@@ -1247,19 +1352,18 @@ function renderJobs(jobs) {
             </p>
 
            
-${
-    (() => {
-        const jobId = String(row[0] || "").trim();
+${(() => {
+    const jobId = String(row[0] || "").trim();
 
-        if (!jobId) {
-            return '<p>Chưa có mã tin để xem chi tiết.</p>';
-        }
+    if (!jobId) {
+        return "<p>Chưa có mã tin để xem chi tiết.</p>";
+    }
 
-        if (duplicateJobIds.has(jobId)) {
-            return '<p>Không thể mở chi tiết: mã tin bị trùng.</p>';
-        }
+    if (duplicateJobIds.has(jobId)) {
+        return "<p>Không thể mở chi tiết: mã tin bị trùng.</p>";
+    }
 
-        return `
+    return `
             <p>
                <a href="${window.location.pathname}?id=${encodeURIComponent(jobId)}"
    class="job-detail-link action-button"
@@ -1268,164 +1372,175 @@ ${
 </a>
             </p>
         `;
-    })()
-}
+})()}
 
 
         </div>
-    `).join("");
-}
-
-/* TẢI DỮ LIỆU */
-
-/* TẢI DỮ LIỆU */
-const requestedId = new URLSearchParams(window.location.search).get("id");
-
-let allDataLoaded = false;
-let loadingAllData = null;
-
-function loadAllJobs() {
-    if (allDataLoaded) {
-        return Promise.resolve();
-    }
-
-    if (loadingAllData) {
-        return loadingAllData;
-    }
-
-    loadingAllData = fetch(sheetURL + "?mode=all")
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Không tải được toàn bộ dữ liệu");
+    `,
+                    )
+                    .join("");
             }
-            return response.json();
-        })
-       .then(data => {
-    console.log("Tổng số dòng API trả về:", data.length);
-    displayJobs(data, true);
-    console.log("Số tin trong allJobs sau khi nạp:", allJobs.length);
-    allDataLoaded = true;
-})
-        .catch(error => {
-            loadingAllData = null;
-            console.error("Lỗi tải toàn bộ dữ liệu:", error);
-            throw error;
-        });
 
-    return loadingAllData;
-}
+            /* Tải toàn bộ dữ liệu khi người dùng cần tìm kiếm hoặc lọc danh sách */
+            const requestedId = new URLSearchParams(window.location.search).get("id");
 
-// Mở trang chủ: chỉ lấy 10 tin.
-// Mở đường dẫn chi tiết: lấy toàn bộ để tìm đúng mã tin.
-fetch(requestedId ? sheetURL + "?mode=all" : sheetURL)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error("Không tải được dữ liệu");
-        }
-        return response.json();
-    })
-    .then(data => {
-        displayJobs(data);
+            let allDataLoaded = false;
+            let loadingAllData = null;
 
-        if (requestedId) {
-            allDataLoaded = true;
-        }
-    })
-    .catch(error => {
-        jobList.innerHTML =
-            "<p>Chưa kết nối được dữ liệu. Vui lòng thử lại sau.</p>";
+            function loadAllJobs() {
+                if (allDataLoaded) {
+                    return Promise.resolve();
+                }
 
-        jobCount.textContent = "";
-        console.error("Lỗi tải dữ liệu:", error);
-    });
+                if (loadingAllData) {
+                    return loadingAllData;
+                }
 
-/* SỰ KIỆN TÌM KIẾM VÀ LỌC */
+                loadingAllData = fetch(sheetURL + "?mode=all")
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error("Không tải được toàn bộ dữ liệu");
+                        }
+                        return response.json();
+                    })
+                    .then((data) => {
+                        console.log("Tổng số dòng API trả về:", data.length);
+                        displayJobs(data, true);
+                        console.log("Số tin trong allJobs sau khi nạp:", allJobs.length);
+                        allDataLoaded = true;
+                    })
+                    .catch((error) => {
+                        loadingAllData = null;
+                        console.error("Lỗi tải toàn bộ dữ liệu:", error);
+                        throw error;
+                    });
 
-// Có từ khóa thì tự động chọn tất cả ngành nghề và khóa ô ngành
-function updateIndustryFilter() {
-    const hasKeyword = searchInput.value.trim() !== "";
+                return loadingAllData;
+            }
 
-    if (hasKeyword) {
-        industryFilter.value = "all";
-    }
+            // Mở trang chủ: chỉ lấy 10 tin.
+            // Mở đường dẫn chi tiết: lấy toàn bộ để tìm đúng mã tin.
+            fetch(requestedId ? sheetURL + "?mode=all" : sheetURL)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Không tải được dữ liệu");
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    displayJobs(data);
 
-    industryFilter.disabled = hasKeyword;
-}
+                    if (requestedId) {
+                        allDataLoaded = true;
+                    }
+                })
+                .catch((error) => {
+                    jobList.innerHTML = "<p>Chưa kết nối được dữ liệu. Vui lòng thử lại sau.</p>";
 
-// Cập nhật khi người dùng nhập hoặc xóa từ khóa
-searchInput.addEventListener("input", updateIndustryFilter);
+                    jobCount.textContent = "";
+                    console.error("Lỗi tải dữ liệu:", error);
+                });
 
-// Tìm kiếm khi bấm nút
+            /* Gắn sự kiện tìm kiếm, chọn ngành nghề và chọn mức lương */
 
-// Cập nhật khi người dùng nhập hoặc xóa từ khóa
-searchInput.addEventListener("input", updateIndustryFilter);
+            // Có từ khóa thì tự động chọn tất cả ngành nghề và khóa ô ngành
+            function updateIndustryFilter() {
+                const hasKeyword = searchInput.value.trim() !== "";
 
-// Tìm kiếm khi bấm nút
-document.getElementById("searchButton").addEventListener("click", function() {
-    loadAllJobs()
-        .then(applyFilters)
-        .catch(() => {
-            jobList.innerHTML =
-                "<p>Không tải được dữ liệu tìm kiếm. Vui lòng thử lại.</p>";
-        });
-});
+                if (hasKeyword) {
+                    industryFilter.value = "all";
+                }
 
-// Tìm kiếm khi nhấn Enter
-searchInput.addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-        document.getElementById("searchButton").click();
-    }
-});
+                industryFilter.disabled = hasKeyword;
+            }
 
-// Chọn ngành nghề
-industryFilter.addEventListener("change", function() {
-    loadAllJobs()
-        .then(applyFilters)
-        .catch(() => {
-            jobList.innerHTML =
-                "<p>Không tải được dữ liệu. Vui lòng thử lại.</p>";
-        });
-});
+            // Cập nhật khi người dùng nhập hoặc xóa từ khóa
+            searchInput.addEventListener("input", updateIndustryFilter);
 
-// Chọn mức lương
-salaryFilter.addEventListener("change", function() {
-    loadAllJobs()
-        .then(applyFilters)
-        .catch(() => {
-            jobList.innerHTML =
-                "<p>Không tải được dữ liệu. Vui lòng thử lại.</p>";
-        });
-});
+            // Tìm kiếm khi bấm nút
 
-// Khởi tạo trạng thái ban đầu
-updateIndustryFilter();
+            // Cập nhật khi người dùng nhập hoặc xóa từ khóa
+            searchInput.addEventListener("input", updateIndustryFilter);
 
+            // Tìm kiếm khi bấm nút
+            document.getElementById("searchButton").addEventListener("click", function () {
+                loadAllJobs()
+                    .then(applyFilters)
+                    .catch(() => {
+                        jobList.innerHTML =
+                            "<p>Không tải được dữ liệu tìm kiếm. Vui lòng thử lại.</p>";
+                    });
+            });
 
+            // Tìm kiếm khi nhấn Enter
+            searchInput.addEventListener("keydown", function (event) {
+                if (event.key === "Enter") {
+                    document.getElementById("searchButton").click();
+                }
+            });
 
-</script>
+            // Chọn ngành nghề
+            industryFilter.addEventListener("change", function () {
+                loadAllJobs()
+                    .then(applyFilters)
+                    .catch(() => {
+                        jobList.innerHTML = "<p>Không tải được dữ liệu. Vui lòng thử lại.</p>";
+                    });
+            });
 
+            // Chọn mức lương
+            salaryFilter.addEventListener("change", function () {
+                loadAllJobs()
+                    .then(applyFilters)
+                    .catch(() => {
+                        jobList.innerHTML = "<p>Không tải được dữ liệu. Vui lòng thử lại.</p>";
+                    });
+            });
 
+            // Khởi tạo trạng thái ban đầu
+            updateIndustryFilter();
+        </script>
 
+        <!-- Nút mở biểu mẫu để người dùng gửi phản hồi -->
+        <a
+            class="feedback-button"
+            href="https://docs.google.com/forms/d/e/1FAIpQLScLptlwm4EdVJsAj2u7XMB4mtDKW_FicnZOJNmyE6ZGsCnLLw/viewform?usp=publish-editor"
+            target="_blank"
+            rel="noopener noreferrer"
+            style="
+                position: fixed;
+                right: 16px;
+                bottom: 16px;
+                z-index: 9999;
+                padding: 9px 13px;
+                background: #2563eb;
+                color: white;
+                text-decoration: none;
+                border-radius: 24px;
+                font-size: 13px;
+                font-weight: 600;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+            "
+        >
+            Gửi phản hồi
+        </a>
 
-
-
-
-
-
-<a class="feedback-button"
-href="https://docs.google.com/forms/d/e/1FAIpQLScLptlwm4EdVJsAj2u7XMB4mtDKW_FicnZOJNmyE6ZGsCnLLw/viewform?usp=publish-editor"
-   target="_blank"
-   rel="noopener noreferrer"
-   style="position:fixed; right:16px; bottom:16px; z-index:9999; padding:9px 13px; background:#2563eb; color:white; text-decoration:none; border-radius:24px; font-size:13px; font-weight:600; box-shadow:0 2px 8px rgba(0,0,0,0.18);">
-    Gửi phản hồi
-</a>
-
-<!-- Bộ đếm lượt truy cập -->
-<div style="width:100%; display:flex; justify-content:center; align-items:center; margin:10px auto 65px;">
-    <script src="https://www.stats4u.net/s4u.js"
-            data-id="4452160533"
-            data-style="908"
-            async></script>
-</div>
-</body>
+        <!-- Bộ đếm lượt truy cập của website -->
+        <div
+            style="
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 10px auto 65px;
+            "
+        >
+            <script
+                src="https://www.stats4u.net/s4u.js"
+                data-id="4452160533"
+                data-style="908"
+                async
+            ></script>
+        </div>
+    </body>
 </html>
