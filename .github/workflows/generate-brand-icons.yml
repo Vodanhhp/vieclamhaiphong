@@ -2,8 +2,8 @@ name: Generate 247 brand icons
 
 on:
   push:
-    paths:
-      - ".github/workflows/generate-brand-icons.yml"
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
