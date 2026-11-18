@@ -2,6 +2,7 @@
 <html lang="vi">
     <head>
         <!-- Biểu tượng, thông tin hiển thị trên trình duyệt và nội dung chia sẻ trang -->
+        <link rel="icon" type="image/svg+xml" href="/icon-247.svg" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -897,6 +898,95 @@
                 .header-content p { font-size: 9px !important; }
             }
 
+        
+            /* Header gọn, nhẹ hơn; logo dùng chung file biểu tượng 247 */
+            .site-header {
+                padding: 0 18px 5px !important;
+                background: linear-gradient(115deg, #163F38 0%, #246B5C 100%) !important;
+            }
+            .site-nav {
+                padding: 5px 12px !important;
+                min-height: 43px;
+                border-bottom-color: rgba(221,239,231,.14) !important;
+            }
+            .site-nav-mark {
+                display: block !important;
+                width: 30px !important;
+                height: 30px !important;
+                flex: 0 0 30px !important;
+                padding: 0 !important;
+                border: 0 !important;
+                border-radius: 8px !important;
+                object-fit: cover;
+                background: transparent !important;
+                box-shadow: none !important;
+            }
+            .site-nav-brand { gap: 7px !important; }
+            .site-nav-brand strong {
+                font-size: 11px !important;
+                font-weight: 700 !important;
+                letter-spacing: .015em !important;
+            }
+            .location-pill { font-size: 9px !important; padding: 3px 8px !important; }
+            .site-nav-links {
+                padding: 6px 12px 7px !important;
+                gap: 10px !important;
+            }
+            .site-nav-links a { font-size: 10px !important; }
+            .header-content {
+                padding: 1px 8px 2px !important;
+                max-width: 760px !important;
+            }
+            .header-tag {
+                margin: 0 0 2px !important;
+                padding: 3px 8px !important;
+                font-size: 8px !important;
+                border-color: rgba(255,255,255,.18) !important;
+                background: rgba(255,255,255,.06) !important;
+            }
+            .header-content h1 {
+                margin: 0 !important;
+                font-size: 18px !important;
+                line-height: 1.2 !important;
+                font-weight: 700 !important;
+                letter-spacing: -.02em !important;
+            }
+            .header-content p {
+                margin: 2px 0 0 !important;
+                font-size: 10px !important;
+                line-height: 1.35 !important;
+                color: #D9E8E2 !important;
+            }
+            footer {
+                margin-top: 0 !important;
+                padding: 18px 20px !important;
+                background: #EAF1ED !important;
+                border-top: 1px solid #DCE7E0 !important;
+                color: #52685E !important;
+                text-align: center !important;
+                font-size: 10px !important;
+                line-height: 1.65 !important;
+            }
+            footer strong { color: #176B5C !important; font-size: 12px !important; }
+            footer a { color: #176B5C !important; }
+            @media (min-width: 760px) {
+                .site-header { padding-bottom: 5px !important; }
+                .site-nav { padding-top: 5px !important; padding-bottom: 5px !important; }
+                .header-content { padding-top: 1px !important; padding-bottom: 2px !important; }
+                .header-content h1 { font-size: 20px !important; }
+            }
+            @media (max-width: 650px) {
+                .site-header { padding: 0 10px 4px !important; }
+                .site-nav { padding: 4px 3px !important; min-height: 39px; }
+                .site-nav-mark { width: 28px !important; height: 28px !important; flex-basis: 28px !important; }
+                .site-nav-brand strong { font-size: 10px !important; }
+                .site-nav-links { padding: 5px 3px 6px !important; }
+                .site-nav-links a { font-size: 9px !important; }
+                .header-content h1 { font-size: 16px !important; }
+                .header-content p { font-size: 9px !important; }
+                footer { padding: 15px 12px !important; }
+            }
+
         </style>
 
         <!-- Đo lường lượt truy cập bằng Google Analytics -->
@@ -916,7 +1006,7 @@
         <header class="site-header" id="top">
             <div class="site-nav">
                 <a class="site-nav-brand" href="/" aria-label="Việc làm Hải Phòng 247 - Trang chủ">
-                    <span class="site-nav-mark" aria-hidden="true"><span>24</span><b>7</b></span>
+                    <img class="site-nav-mark" src="/icon-247.svg" alt="" aria-hidden="true" />
                     <span><strong>VIỆC LÀM HẢI PHÒNG</strong></span>
                 </a>
                 <span class="location-pill">Hải Phòng</span>
