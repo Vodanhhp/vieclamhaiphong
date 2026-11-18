@@ -9,7 +9,7 @@
 
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="theme-color" content="#087FBD" />
+        <meta name="theme-color" content="#102F2B" />
         <meta
             name="description"
             content="Cổng thông tin việc làm Hải Phòng. Cập nhật việc làm mới nhất, đặc biệt các vị trí kỹ thuật và bảo trì."
@@ -33,6 +33,9 @@
         <title>Việc làm Hải Phòng 247 – Tìm việc và Tuyển dụng tại Hải Phòng</title>
 
         <!-- Kiểu giao diện của trang: bố cục, danh sách việc làm và hiển thị trên điện thoại -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
         <style>
             /* Thiết lập kiểu hiển thị cơ bản cho toàn trang */
             * {
@@ -428,6 +431,287 @@
                 background: #e5e7eb;
                 cursor: not-allowed;
             }
+
+            /* ===== Vieclamhp247 – nhận diện giao diện đồng bộ BAOTRI Mini ===== */
+            :root {
+                --hp-primary: #176B5C;
+                --hp-deep: #102F2B;
+                --hp-bg: #F3F6F5;
+                --hp-green: #23835F;
+                --hp-text: #172B28;
+                --hp-muted: #5F7268;
+                --hp-border: #E6ECE9;
+                --hp-hover: #10594C;
+            }
+
+            html { scroll-behavior: smooth; }
+            body {
+                font-family: "Be Vietnam Pro", Arial, sans-serif;
+                background: var(--hp-bg);
+                color: var(--hp-text);
+                line-height: 1.6;
+            }
+
+            .site-nav {
+                position: relative;
+                z-index: 2;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 22px;
+                max-width: 1180px;
+                margin: 0 auto;
+                padding: 17px 24px;
+                color: #fff;
+            }
+            .site-nav-brand {
+                display: inline-flex;
+                align-items: center;
+                gap: 11px;
+                color: #fff;
+                text-decoration: none;
+                font-size: 16px;
+                font-weight: 800;
+                letter-spacing: .02em;
+                white-space: nowrap;
+            }
+            .site-nav-mark {
+                display: grid;
+                place-items: center;
+                width: 38px;
+                height: 38px;
+                border-radius: 11px;
+                background: #1E7567;
+                color: #fff;
+                font-size: 13px;
+                font-weight: 800;
+            }
+            .site-nav-links {
+                display: flex;
+                align-items: center;
+                gap: 25px;
+            }
+            .site-nav-links a {
+                color: #D7E8E2;
+                text-decoration: none;
+                font-size: 13px;
+                font-weight: 600;
+                transition: color .2s;
+            }
+            .site-nav-links a:hover { color: #fff; }
+
+            header {
+                padding: 0 20px 105px;
+                background:
+                    linear-gradient(115deg, rgba(16,47,43,.97), rgba(23,107,92,.91)),
+                    url("banner-haiphong.jpg") center 42% / cover no-repeat;
+                box-shadow: none;
+            }
+            .header-content {
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 43px 15px 0;
+                text-align: center;
+            }
+            header h1 {
+                font-size: clamp(28px, 4vw, 42px);
+                line-height: 1.25;
+                letter-spacing: -.035em;
+                font-weight: 800;
+                text-shadow: none;
+            }
+            header p {
+                margin-top: 14px;
+                color: #D8E9E3;
+                font-size: 15px;
+                text-shadow: none;
+            }
+            .header-tag {
+                margin-top: 20px;
+                padding: 7px 14px;
+                border: 1px solid rgba(255,255,255,.24);
+                border-radius: 999px;
+                background: rgba(255,255,255,.09);
+                color: #F1F7F4;
+                font-size: 12px;
+                font-weight: 600;
+            }
+
+            main {
+                position: relative;
+                z-index: 1;
+                max-width: 1120px;
+                margin: -52px auto 44px;
+                padding: 0 22px;
+            }
+            .search-box {
+                padding: 25px;
+                border: 1px solid var(--hp-border);
+                border-radius: 16px;
+                background: #fff;
+                box-shadow: 0 14px 38px rgba(16,47,43,.10);
+            }
+            .search-title {
+                margin-bottom: 17px;
+                color: var(--hp-text);
+                font-size: 18px;
+                font-weight: 750;
+            }
+            .filter-row {
+                grid-template-columns: minmax(0, 1.6fr) minmax(170px, 1fr) minmax(160px, .9fr) auto;
+                gap: 10px;
+            }
+            .search {
+                min-height: 48px;
+                padding: 12px 14px;
+                border: 1px solid var(--hp-border);
+                border-radius: 10px;
+                background: #FBFCFB;
+                color: var(--hp-text);
+                font: inherit;
+                font-size: 13px;
+            }
+            .search:focus {
+                border-color: #4A9A83;
+                box-shadow: 0 0 0 3px rgba(35,131,95,.12);
+            }
+            .search-button, .action-button {
+                border-radius: 10px;
+                background: var(--hp-primary);
+                color: #fff;
+                font-family: inherit;
+                font-weight: 700;
+                box-shadow: none;
+            }
+            .search-button { min-height: 48px; padding: 0 22px; font-size: 13px; }
+            .search-button:hover, .action-button:hover {
+                background: var(--hp-hover);
+                color: #fff;
+                box-shadow: 0 5px 13px rgba(16,47,43,.14);
+            }
+            .section-heading {
+                margin: 32px 0 17px;
+                align-items: flex-end;
+            }
+            .section-title {
+                padding-left: 13px;
+                border-left: 4px solid var(--hp-primary);
+                color: var(--hp-text);
+                font-size: 21px;
+                font-weight: 800;
+                letter-spacing: -.02em;
+            }
+            .job-count { color: var(--hp-muted); font-size: 12px; }
+            #jobList {
+                display: grid;
+                grid-template-columns: minmax(0, 1fr);
+                gap: 13px;
+            }
+            .job {
+                padding: 21px 23px;
+                border: 1px solid var(--hp-border);
+                border-left: 3px solid var(--hp-primary);
+                border-radius: 13px;
+                background: #fff;
+                box-shadow: 0 3px 12px rgba(16,47,43,.035);
+                transition: border-color .2s, box-shadow .2s, transform .2s;
+            }
+            .job:hover {
+                transform: translateY(-2px);
+                border-color: #C8DCD3;
+                border-left-color: var(--hp-primary);
+                box-shadow: 0 9px 22px rgba(16,47,43,.075);
+            }
+            .job h3 {
+                margin: 0 0 11px;
+                color: var(--hp-primary);
+                font-size: 16px;
+                line-height: 1.55;
+                font-weight: 750;
+            }
+            .job p {
+                color: #40564D;
+                font-size: 13px;
+                line-height: 1.7;
+            }
+            .salary {
+                border-radius: 8px;
+                background: #EAF4EF;
+                color: #176B5C;
+                font-size: 13px;
+                font-weight: 750;
+            }
+            .job .job-date { color: #82928B; }
+            details {
+                margin-top: 14px;
+                padding-top: 11px;
+                border-top: 1px solid #EDF1EE;
+            }
+            summary { color: var(--hp-primary); font-size: 13px; }
+            summary:hover { color: var(--hp-hover); }
+            .detail { color: #40564D; font-size: 13px; line-height: 1.8; }
+            .action-button {
+                min-height: 38px;
+                padding: 0 13px;
+                font-size: 12px;
+            }
+            .feedback-button:hover { background: var(--hp-hover) !important; }
+            .status-verified {
+                color: #176B5C;
+                background: #E5F3EC;
+                border-radius: 999px;
+            }
+            .status-pending {
+                color: #8A641B;
+                background: #FBF2D9;
+                border-radius: 999px;
+            }
+            .status-expired {
+                color: #9A4545;
+                background: #F9E8E7;
+                border-radius: 999px;
+            }
+            #industryFilter:disabled { background: #F0F3F1; }
+
+            footer {
+                margin-top: 0;
+                padding: 30px 18px;
+                border-top: 1px solid #294B43;
+                background: var(--hp-deep);
+                color: #B8CBC3;
+                font-size: 12px;
+            }
+            footer strong, footer a { color: #E5F2EC; }
+            footer a:hover { color: #fff; }
+
+            @media (max-width: 900px) {
+                .filter-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            }
+            @media (max-width: 650px) {
+                .site-nav { padding: 13px 17px; }
+                .site-nav-brand { font-size: 14px; }
+                .site-nav-mark { width: 34px; height: 34px; }
+                .site-nav-links { gap: 13px; }
+                .site-nav-links a { font-size: 11px; }
+                header { padding: 0 15px 83px; }
+                .header-content { padding: 35px 5px 0; }
+                header h1 { font-size: 27px; }
+                header p { font-size: 13px; line-height: 1.7; }
+                main { margin: -38px auto 32px; padding: 0 14px; }
+                .search-box { padding: 19px 16px; border-radius: 14px; }
+                .filter-row { grid-template-columns: 1fr; }
+                .search-button { min-height: 46px; }
+                .section-heading { margin-top: 27px; }
+                .section-title { font-size: 18px; }
+                .job { padding: 17px; }
+                .job h3 { font-size: 15px; }
+                footer { padding: 25px 14px; }
+            }
+            @media (max-width: 380px) {
+                .site-nav { align-items: flex-start; flex-direction: column; gap: 9px; }
+                .site-nav-links { width: 100%; justify-content: space-between; }
+            }
+
         </style>
 
         <!-- Đo lường lượt truy cập bằng Google Analytics -->
@@ -444,17 +728,28 @@
 
     <body>
         <!-- Tiêu đề và thông điệp chính của website -->
+        <div id="top" class="site-nav">
+            <a class="site-nav-brand" href="/" aria-label="Việc làm Hải Phòng 247 - Trang chủ">
+                <span class="site-nav-mark">HP</span>
+                <span>VIỆC LÀM HẢI PHÒNG 247</span>
+            </a>
+            <nav class="site-nav-links" aria-label="Điều hướng chính">
+                <a href="#top">Trang chủ</a>
+                <a href="#searchPanel">Tìm việc</a>
+                <a href="#jobList">Tin tuyển dụng</a>
+            </nav>
+        </div>
         <header>
             <div class="header-content">
-                <h1>VIỆC LÀM HẢI PHÒNG</h1>
-                <p>Cập nhật cơ hội việc làm mới nhất tại Hải Phòng</p>
-                <span class="header-tag">Kết nối cơ hội - Phát triển nghề nghiệp</span>
+                <h1>Tìm việc phù hợp.<br />Phát triển tương lai.</h1>
+                <p>Tổng hợp cơ hội việc làm tại Hải Phòng, cập nhật từ các nguồn tuyển dụng.</p>
+                <span class="header-tag">Kết nối cơ hội · Phát triển nghề nghiệp</span>
             </div>
         </header>
 
         <main>
             <!-- Khu vực nhập từ khóa, chọn ngành nghề và chọn mức lương -->
-            <section class="search-box">
+            <section id="searchPanel" class="search-box">
                 <h2 class="search-title">Tìm kiếm việc làm</h2>
 
                 <div class="filter-row">
