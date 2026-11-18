@@ -753,6 +753,49 @@
             @media(min-width:760px){.site-header{padding-left:32px;padding-right:32px}.header-content{padding-top:15px;padding-bottom:10px}.header-content h1{font-size:32px}main{padding-left:32px;padding-right:32px}.search-box{border-radius:12px;margin-top:14px}.search-controls{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:8px}#keywordSearch{grid-column:1/-1}.location-line{align-self:center}.filter-row{grid-column:1/-1;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto}.filter-row .search-button{grid-column:auto}.stats-grid{gap:12px;margin:12px 0 20px}.stat-card{padding:12px 14px}.stat-card strong{font-size:20px}.stat-card span{font-size:11px}.compact-heading{font-size:16px}.industry-grid{gap:10px}.industry-card{min-height:65px;padding:10px 13px;font-size:12px}#jobList{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.job{padding:15px}.job h3{font-size:14px}.job p{font-size:11px}.status-verified,.status-pending,.status-expired{font-size:9px}.job .job-date{font-size:10px}summary{font-size:10px}footer{padding:20px 32px}}
             @media(max-width:420px){.site-header{padding-left:16px;padding-right:16px}main{padding-left:12px;padding-right:12px}footer{padding-left:12px;padding-right:12px}.site-nav-links a{font-size:9px}.salary{float:none;display:block;margin:4px 0!important}}
 
+
+            /* Tang kha nang doc tren dien thoai va dong bo nut phan hoi */
+            @media (max-width: 650px) {
+                .site-nav-brand { font-size: 14px; }
+                .site-nav-brand strong { font-size: 15px; }
+                .site-nav-brand small { font-size: 10px; }
+                .site-nav-links a { font-size: 11px; }
+                .header-content h1 { font-size: 25px; }
+                .header-content p { font-size: 13px; }
+                .search { min-height: 42px; font-size: 13px; }
+                .filter-row .search-button { min-height: 42px; font-size: 13px; }
+                .location-line, .filter-hint { font-size: 11px; }
+                .stat-card strong { font-size: 17px; }
+                .stat-card span { font-size: 10px; }
+                .compact-heading { font-size: 15px; }
+                .industry-card { font-size: 12px; }
+                .industry-card span { font-size: 14px; }
+                .job h3 { font-size: 14px; line-height: 1.55; }
+                .job p { font-size: 12px; line-height: 1.6; }
+                .status-verified, .status-pending, .status-expired { font-size: 9px; }
+                .salary { font-size: 12px !important; }
+                .job .job-date { font-size: 10px; }
+                summary { font-size: 12px; }
+                .detail { font-size: 12px; line-height: 1.75; }
+                .action-button { min-height: 30px; font-size: 11px; }
+            }
+            .feedback-button {
+                background: #176B5C !important;
+                color: #fff !important;
+                border: 1px solid #23835F;
+                border-radius: 24px !important;
+                font-family: "Be Vietnam Pro", Arial, sans-serif;
+                font-size: 13px !important;
+                font-weight: 600;
+                box-shadow: 0 3px 10px rgba(16, 47, 43, .22) !important;
+                transition: background .18s ease, transform .18s ease;
+            }
+            .feedback-button:hover {
+                background: #10594C !important;
+                transform: translateY(-1px);
+            }
+            .feedback-button:active { transform: translateY(0); }
+
 </style>
 
         <!-- Đo lường lượt truy cập bằng Google Analytics -->
