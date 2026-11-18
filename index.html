@@ -840,7 +840,64 @@
                 .header-content p { font-size: 11px !important; }
             }
 
-</style>
+
+            /* Chỉnh gọn phần đầu trang theo góp ý */
+            .site-header {
+                padding: 0 18px 6px !important;
+            }
+            .site-nav {
+                padding: 6px 18px !important;
+                gap: 14px !important;
+            }
+            .site-nav-mark {
+                width: 34px !important;
+                height: 34px !important;
+                flex-basis: 34px !important;
+                border-radius: 9px !important;
+                font-size: 12px !important;
+            }
+            .site-nav-mark b { font-size: 14px !important; }
+            .site-nav-brand {
+                gap: 8px !important;
+                font-size: 13px !important;
+            }
+            .site-nav-brand strong {
+                font-size: 12px !important;
+                letter-spacing: .02em !important;
+            }
+            .header-content {
+                padding: 0 8px !important;
+            }
+            .header-tag {
+                margin-top: 2px !important;
+                margin-bottom: 3px !important;
+                padding: 4px 9px !important;
+                font-size: 8px !important;
+            }
+            .header-content h1 {
+                font-size: 21px !important;
+                line-height: 1.2 !important;
+                margin: 0 !important;
+            }
+            .header-content p {
+                margin-top: 2px !important;
+                font-size: 10px !important;
+                line-height: 1.35 !important;
+            }
+            @media (max-width: 650px) {
+                .site-header { padding: 0 12px 5px !important; }
+                .site-nav { padding: 5px 4px !important; }
+                .site-nav-mark {
+                    width: 32px !important;
+                    height: 32px !important;
+                    flex-basis: 32px !important;
+                }
+                .site-nav-brand strong { font-size: 11px !important; }
+                .header-content h1 { font-size: 18px !important; }
+                .header-content p { font-size: 9px !important; }
+            }
+
+        </style>
 
         <!-- Đo lường lượt truy cập bằng Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-23HE4MQ3N9"></script>
@@ -860,7 +917,7 @@
             <div class="site-nav">
                 <a class="site-nav-brand" href="/" aria-label="Việc làm Hải Phòng 247 - Trang chủ">
                     <span class="site-nav-mark" aria-hidden="true"><span>24</span><b>7</b></span>
-                    <span><strong>HỆ SINH THÁI 247</strong><small>VIỆC LÀM HẢI PHÒNG</small></span>
+                    <span><strong>VIỆC LÀM HẢI PHÒNG</strong></span>
                 </a>
                 <span class="location-pill">Hải Phòng</span>
             </div>
